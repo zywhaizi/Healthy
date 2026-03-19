@@ -102,9 +102,10 @@
     [_contentView addSubview:dateLbl];
 
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, sw-40, 36)];
+    titleLbl.tag       = 902;
     titleLbl.text      = @"\u5065\u5eb7\u4eea\u8868\u76d8";
     titleLbl.font      = [UIFont systemFontOfSize:28 weight:UIFontWeightHeavy];
-    titleLbl.textColor = [UIColor whiteColor];
+    titleLbl.textColor = [UIColor colorWithRed:0.10 green:0.12 blue:0.18 alpha:1.0];
     [_contentView addSubview:titleLbl];
 }
 
@@ -244,6 +245,14 @@
 
 #pragma mark - Theme
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    BOOL dark = [HCHealthDataModel shared].isDarkMode;
+    if (@available(iOS 13.0, *)) {
+        return dark ? UIStatusBarStyleLightContent : UIStatusBarStyleDarkContent;
+    }
+    return dark ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+}
+
 - (void)applyTheme {
     BOOL dark = [HCHealthDataModel shared].isDarkMode;
     UIColor *bg    = dark ? [UIColor colorWithRed:0.06 green:0.08 blue:0.14 alpha:1.0]
@@ -252,9 +261,16 @@
                           : [UIColor whiteColor];
     UIColor *textC = dark ? [UIColor whiteColor]
                           : [UIColor colorWithRed:0.10 green:0.12 blue:0.18 alpha:1.0];
+    UIColor *subC  = dark ? [UIColor colorWithWhite:0.55 alpha:1.0]
+                          : [UIColor colorWithWhite:0.45 alpha:1.0];
     self.view.backgroundColor    = bg;
     _scrollView.backgroundColor  = bg;
     _contentView.backgroundColor = bg;
+    // 更新 header 标题和日期颜色
+    UILabel *titleLbl = (UILabel *)[_contentView viewWithTag:902];
+    if (titleLbl) titleLbl.textColor = textC;
+    // 更新状态栏样式
+    [UIView animateWithDuration:0.2 animations:^{ [self setNeedsStatusBarAppearanceUpdate]; }];
     for (HCDashboardCardView *c in @[_stepsCard, _waterCard, _sleepCard, _moodCard]) {
         c.backgroundColor = cardC;
         c.titleLabel.textColor = textC;
