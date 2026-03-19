@@ -1,0 +1,337 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA100001000000000000AA01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000AA00 /* LaunchScreen.storyboard */; };
+		AA000001000000000000AA01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000AA00 /* LaunchScreen.storyboard */; };
+
+		04C90C412F6BBC9D00673AC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C3C2F6BBC9D00673AC4 /* AppDelegate.m */; };
+		04C90C422F6BBC9D00673AC4 /* HCQuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C282F6BBC9D00673AC4 /* HCQuickAddViewController.m */; };
+		04C90C432F6BBC9D00673AC4 /* HCDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C242F6BBC9D00673AC4 /* HCDashboardViewController.m */; };
+		04C90C442F6BBC9D00673AC4 /* HCWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C392F6BBC9D00673AC4 /* HCWaterView.m */; };
+		04C90C452F6BBC9D00673AC4 /* HCTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C2A2F6BBC9D00673AC4 /* HCTabBarController.m */; };
+		04C90C462F6BBC9D00673AC4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C3E2F6BBC9D00673AC4 /* main.m */; };
+		04C90C472F6BBC9D00673AC4 /* HCMoodTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C332F6BBC9D00673AC4 /* HCMoodTrendView.m */; };
+		04C90C482F6BBC9D00673AC4 /* HCDashboardCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C312F6BBC9D00673AC4 /* HCDashboardCardView.m */; };
+		04C90C492F6BBC9D00673AC4 /* HCRingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C352F6BBC9D00673AC4 /* HCRingProgressView.m */; };
+		04C90C4A2F6BBC9D00673AC4 /* HCSleepBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C372F6BBC9D00673AC4 /* HCSleepBarView.m */; };
+		04C90C4B2F6BBC9D00673AC4 /* HCHealthDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C2D2F6BBC9D00673AC4 /* HCHealthDataModel.m */; };
+		04C90C4C2F6BBC9D00673AC4 /* HCProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C262F6BBC9D00673AC4 /* HCProfileViewController.m */; };
+		68F92B4A7D6E49D9A449198D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61528E2B66DF4D4A8931612F /* Foundation.framework */; };
+		BDF511786C094DD5A6A44ED7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34AE3BE66164327AB40E1AB /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04C90C232F6BBC9D00673AC4 /* HCDashboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCDashboardViewController.h; sourceTree = "<group>"; };
+		04C90C242F6BBC9D00673AC4 /* HCDashboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCDashboardViewController.m; sourceTree = "<group>"; };
+		04C90C252F6BBC9D00673AC4 /* HCProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCProfileViewController.h; sourceTree = "<group>"; };
+		04C90C262F6BBC9D00673AC4 /* HCProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCProfileViewController.m; sourceTree = "<group>"; };
+		04C90C272F6BBC9D00673AC4 /* HCQuickAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCQuickAddViewController.h; sourceTree = "<group>"; };
+		04C90C282F6BBC9D00673AC4 /* HCQuickAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCQuickAddViewController.m; sourceTree = "<group>"; };
+		04C90C292F6BBC9D00673AC4 /* HCTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCTabBarController.h; sourceTree = "<group>"; };
+		04C90C2A2F6BBC9D00673AC4 /* HCTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCTabBarController.m; sourceTree = "<group>"; };
+		04C90C2C2F6BBC9D00673AC4 /* HCHealthDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCHealthDataModel.h; sourceTree = "<group>"; };
+		04C90C2D2F6BBC9D00673AC4 /* HCHealthDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCHealthDataModel.m; sourceTree = "<group>"; };
+		04C90C302F6BBC9D00673AC4 /* HCDashboardCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCDashboardCardView.h; sourceTree = "<group>"; };
+		04C90C312F6BBC9D00673AC4 /* HCDashboardCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCDashboardCardView.m; sourceTree = "<group>"; };
+		04C90C322F6BBC9D00673AC4 /* HCMoodTrendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCMoodTrendView.h; sourceTree = "<group>"; };
+		04C90C332F6BBC9D00673AC4 /* HCMoodTrendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCMoodTrendView.m; sourceTree = "<group>"; };
+		04C90C342F6BBC9D00673AC4 /* HCRingProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCRingProgressView.h; sourceTree = "<group>"; };
+		04C90C352F6BBC9D00673AC4 /* HCRingProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCRingProgressView.m; sourceTree = "<group>"; };
+		04C90C362F6BBC9D00673AC4 /* HCSleepBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCSleepBarView.h; sourceTree = "<group>"; };
+		04C90C372F6BBC9D00673AC4 /* HCSleepBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCSleepBarView.m; sourceTree = "<group>"; };
+		04C90C382F6BBC9D00673AC4 /* HCWaterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCWaterView.h; sourceTree = "<group>"; };
+		04C90C392F6BBC9D00673AC4 /* HCWaterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCWaterView.m; sourceTree = "<group>"; };
+		04C90C3B2F6BBC9D00673AC4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		04C90C3C2F6BBC9D00673AC4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		04C90C3D2F6BBC9D00673AC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA100001000000000000AA00 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AA000001000000000000AA00 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04C90C3E2F6BBC9D00673AC4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		61528E2B66DF4D4A8931612F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BDE2EF95F3F948ACB4B7C59B /* HealthCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D34AE3BE66164327AB40E1AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0D9FBF95E5884ACF9CA711C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDF511786C094DD5A6A44ED7 /* UIKit.framework in Frameworks */,
+				68F92B4A7D6E49D9A449198D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04C90C2B2F6BBC9D00673AC4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				04C90C232F6BBC9D00673AC4 /* HCDashboardViewController.h */,
+				04C90C242F6BBC9D00673AC4 /* HCDashboardViewController.m */,
+				04C90C252F6BBC9D00673AC4 /* HCProfileViewController.h */,
+				04C90C262F6BBC9D00673AC4 /* HCProfileViewController.m */,
+				04C90C272F6BBC9D00673AC4 /* HCQuickAddViewController.h */,
+				04C90C282F6BBC9D00673AC4 /* HCQuickAddViewController.m */,
+				04C90C292F6BBC9D00673AC4 /* HCTabBarController.h */,
+				04C90C2A2F6BBC9D00673AC4 /* HCTabBarController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		04C90C2E2F6BBC9D00673AC4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				04C90C2C2F6BBC9D00673AC4 /* HCHealthDataModel.h */,
+				04C90C2D2F6BBC9D00673AC4 /* HCHealthDataModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		04C90C2F2F6BBC9D00673AC4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		04C90C3A2F6BBC9D00673AC4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04C90C302F6BBC9D00673AC4 /* HCDashboardCardView.h */,
+				04C90C312F6BBC9D00673AC4 /* HCDashboardCardView.m */,
+				04C90C322F6BBC9D00673AC4 /* HCMoodTrendView.h */,
+				04C90C332F6BBC9D00673AC4 /* HCMoodTrendView.m */,
+				04C90C342F6BBC9D00673AC4 /* HCRingProgressView.h */,
+				04C90C352F6BBC9D00673AC4 /* HCRingProgressView.m */,
+				04C90C362F6BBC9D00673AC4 /* HCSleepBarView.h */,
+				04C90C372F6BBC9D00673AC4 /* HCSleepBarView.m */,
+				04C90C382F6BBC9D00673AC4 /* HCWaterView.h */,
+				04C90C392F6BBC9D00673AC4 /* HCWaterView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		04C90C3F2F6BBC9D00673AC4 /* HealthCompanion */ = {
+			isa = PBXGroup;
+			children = (
+				04C90C2B2F6BBC9D00673AC4 /* Controllers */,
+				04C90C2E2F6BBC9D00673AC4 /* Models */,
+				04C90C2F2F6BBC9D00673AC4 /* Resources */,
+				04C90C3A2F6BBC9D00673AC4 /* Views */,
+				04C90C3B2F6BBC9D00673AC4 /* AppDelegate.h */,
+				04C90C3C2F6BBC9D00673AC4 /* AppDelegate.m */,
+				04C90C3D2F6BBC9D00673AC4 /* Info.plist */,
+				04C90C3E2F6BBC9D00673AC4 /* main.m */,
+				AA100001000000000000AA00 /* LaunchScreen.storyboard */,
+			);
+			path = HealthCompanion;
+			sourceTree = "<group>";
+		};
+		B55EA84024464E1EBA6865B3 /* HealthCompanion */ = {
+			isa = PBXGroup;
+			children = (
+				04C90C3F2F6BBC9D00673AC4 /* HealthCompanion */,
+				D34AE3BE66164327AB40E1AB /* UIKit.framework */,
+				61528E2B66DF4D4A8931612F /* Foundation.framework */,
+				C0F138FB16714EE0A5F8DB69 /* Products */,
+			);
+			name = HealthCompanion;
+			sourceTree = "<group>";
+		};
+		C0F138FB16714EE0A5F8DB69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDE2EF95F3F948ACB4B7C59B /* HealthCompanion.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C6D1998883C4A60A4D121F5 /* HealthCompanion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 273ABABF5F81461E80CA8CBE /* Build configuration list for PBXNativeTarget "HealthCompanion" */;
+			buildPhases = (
+				2EEA9265D2FA4FB6BD0A2A52 /* Sources */,
+				0D9FBF95E5884ACF9CA711C1 /* Frameworks */,
+				73147F4557DD453E9E196F2C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HealthCompanion;
+			productName = HealthCompanion;
+			productReference = BDE2EF95F3F948ACB4B7C59B /* HealthCompanion.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7CC0937F8351404384382D15 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					5C6D1998883C4A60A4D121F5 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = CC3B058DB58F4619A61463CA /* Build configuration list for PBXProject "HealthCompanion" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = zh_CN;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				zh_CN,
+				Base,
+			);
+			mainGroup = B55EA84024464E1EBA6865B3 /* HealthCompanion */;
+			productRefGroup = C0F138FB16714EE0A5F8DB69 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C6D1998883C4A60A4D121F5 /* HealthCompanion */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		73147F4557DD453E9E196F2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA100001000000000000AA01 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EEA9265D2FA4FB6BD0A2A52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04C90C412F6BBC9D00673AC4 /* AppDelegate.m in Sources */,
+				04C90C422F6BBC9D00673AC4 /* HCQuickAddViewController.m in Sources */,
+				04C90C432F6BBC9D00673AC4 /* HCDashboardViewController.m in Sources */,
+				04C90C442F6BBC9D00673AC4 /* HCWaterView.m in Sources */,
+				04C90C452F6BBC9D00673AC4 /* HCTabBarController.m in Sources */,
+				04C90C462F6BBC9D00673AC4 /* main.m in Sources */,
+				04C90C472F6BBC9D00673AC4 /* HCMoodTrendView.m in Sources */,
+				04C90C482F6BBC9D00673AC4 /* HCDashboardCardView.m in Sources */,
+				04C90C492F6BBC9D00673AC4 /* HCRingProgressView.m in Sources */,
+				04C90C4A2F6BBC9D00673AC4 /* HCSleepBarView.m in Sources */,
+				04C90C4B2F6BBC9D00673AC4 /* HCHealthDataModel.m in Sources */,
+				04C90C4C2F6BBC9D00673AC4 /* HCProfileViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		01491F90BDC54F2281B661A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/HealthCompanion",
+					"$(SRCROOT)/HealthCompanion/Models",
+					"$(SRCROOT)/HealthCompanion/Views",
+					"$(SRCROOT)/HealthCompanion/Controllers",
+				);
+				INFOPLIST_FILE = HealthCompanion/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthcompanion.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0212AF7E393340E483B26EB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		35C545FE00774C92990345BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F41ABE44C61045AA91CD8CAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/HealthCompanion",
+					"$(SRCROOT)/HealthCompanion/Models",
+					"$(SRCROOT)/HealthCompanion/Views",
+					"$(SRCROOT)/HealthCompanion/Controllers",
+				);
+				INFOPLIST_FILE = HealthCompanion/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthcompanion.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		273ABABF5F81461E80CA8CBE /* Build configuration list for PBXNativeTarget "HealthCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01491F90BDC54F2281B661A8 /* Debug */,
+				F41ABE44C61045AA91CD8CAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC3B058DB58F4619A61463CA /* Build configuration list for PBXProject "HealthCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35C545FE00774C92990345BF /* Debug */,
+				0212AF7E393340E483B26EB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7CC0937F8351404384382D15 /* Project object */;
+}
