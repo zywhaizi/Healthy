@@ -1,0 +1,288 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB01 /* main.m */; };
+		AA02 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB02 /* AppDelegate.m */; };
+		AA03 /* HDHealthDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB03 /* HDHealthDataModel.m */; };
+		AA04 /* HDTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB04 /* HDTabBarController.m */; };
+		AA05 /* HDDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB05 /* HDDashboardViewController.m */; };
+		AA06 /* HDQuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB06 /* HDQuickAddViewController.m */; };
+		AA07 /* HDProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB07 /* HDProfileViewController.m */; };
+		AA08 /* HDRingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB08 /* HDRingProgressView.m */; };
+		AA09 /* HDWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB09 /* HDWaterView.m */; };
+		AA10 /* HDSleepBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB10 /* HDSleepBarView.m */; };
+		AA11 /* HDMoodTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB11 /* HDMoodTrendView.m */; };
+		AA12 /* HDDashboardCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB12 /* HDDashboardCardView.m */; };
+		AA13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB13 /* LaunchScreen.storyboard */; };
+		AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB14 /* UIKit.framework */; };
+		AA15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB15 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BB01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BB01H /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BB02 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BB03H /* HDHealthDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDHealthDataModel.h; sourceTree = "<group>"; };
+		BB03 /* HDHealthDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDHealthDataModel.m; sourceTree = "<group>"; };
+		BB04H /* HDTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDTabBarController.h; sourceTree = "<group>"; };
+		BB04 /* HDTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDTabBarController.m; sourceTree = "<group>"; };
+		BB05H /* HDDashboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDDashboardViewController.h; sourceTree = "<group>"; };
+		BB05 /* HDDashboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDDashboardViewController.m; sourceTree = "<group>"; };
+		BB06H /* HDQuickAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDQuickAddViewController.h; sourceTree = "<group>"; };
+		BB06 /* HDQuickAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDQuickAddViewController.m; sourceTree = "<group>"; };
+		BB07H /* HDProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDProfileViewController.h; sourceTree = "<group>"; };
+		BB07 /* HDProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDProfileViewController.m; sourceTree = "<group>"; };
+		BB08H /* HDRingProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDRingProgressView.h; sourceTree = "<group>"; };
+		BB08 /* HDRingProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDRingProgressView.m; sourceTree = "<group>"; };
+		BB09H /* HDWaterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDWaterView.h; sourceTree = "<group>"; };
+		BB09 /* HDWaterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDWaterView.m; sourceTree = "<group>"; };
+		BB10H /* HDSleepBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDSleepBarView.h; sourceTree = "<group>"; };
+		BB10 /* HDSleepBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDSleepBarView.m; sourceTree = "<group>"; };
+		BB11H /* HDMoodTrendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDMoodTrendView.h; sourceTree = "<group>"; };
+		BB11 /* HDMoodTrendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDMoodTrendView.m; sourceTree = "<group>"; };
+		BB12H /* HDDashboardCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDDashboardCardView.h; sourceTree = "<group>"; };
+		BB12 /* HDDashboardCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDDashboardCardView.m; sourceTree = "<group>"; };
+		BB13 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BB14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BB15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BB16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB20 /* HealthDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CC01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA14 /* UIKit.framework in Frameworks */,
+				AA15 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CC10 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB04H /* HDTabBarController.h */,
+				BB04 /* HDTabBarController.m */,
+				BB05H /* HDDashboardViewController.h */,
+				BB05 /* HDDashboardViewController.m */,
+				BB06H /* HDQuickAddViewController.h */,
+				BB06 /* HDQuickAddViewController.m */,
+				BB07H /* HDProfileViewController.h */,
+				BB07 /* HDProfileViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CC11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB03H /* HDHealthDataModel.h */,
+				BB03 /* HDHealthDataModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CC12 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB08H /* HDRingProgressView.h */,
+				BB08 /* HDRingProgressView.m */,
+				BB09H /* HDWaterView.h */,
+				BB09 /* HDWaterView.m */,
+				BB10H /* HDSleepBarView.h */,
+				BB10 /* HDSleepBarView.m */,
+				BB11H /* HDMoodTrendView.h */,
+				BB11 /* HDMoodTrendView.m */,
+				BB12H /* HDDashboardCardView.h */,
+				BB12 /* HDDashboardCardView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CC13 /* HealthDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				CC10 /* Controllers */,
+				CC11 /* Models */,
+				CC12 /* Views */,
+				BB01H /* AppDelegate.h */,
+				BB02 /* AppDelegate.m */,
+				BB01 /* main.m */,
+				BB13 /* LaunchScreen.storyboard */,
+				BB16 /* Info.plist */,
+			);
+			path = HealthDashboard;
+			sourceTree = "<group>";
+		};
+		CC14 /* Products */ = {
+			isa = PBXGroup;
+			children = (BB20 /* HealthDashboard.app */,);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC15 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				CC13 /* HealthDashboard */,
+				BB14 /* UIKit.framework */,
+				BB15 /* Foundation.framework */,
+				CC14 /* Products */,
+			);
+			name = HealthDashboard;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CC20 /* HealthDashboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC30 /* Build configuration list for PBXNativeTarget "HealthDashboard" */;
+			buildPhases = (CC02 /* Sources */, CC01 /* Frameworks */, CC03 /* Resources */,);
+			buildRules = ();
+			dependencies = ();
+			name = HealthDashboard;
+			productName = HealthDashboard;
+			productReference = BB20 /* HealthDashboard.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CC21 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1600;
+				TargetAttributes = { CC20 = { CreatedOnToolsVersion = 16.0; }; };
+			};
+			buildConfigurationList = CC31 /* Build configuration list for PBXProject */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = zh_CN;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, zh_CN, Base);
+			mainGroup = CC15;
+			productRefGroup = CC14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (CC20 /* HealthDashboard */,);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CC03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (AA13 /* LaunchScreen.storyboard in Resources */,);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CC02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA01 /* main.m in Sources */,
+				AA02 /* AppDelegate.m in Sources */,
+				AA03 /* HDHealthDataModel.m in Sources */,
+				AA04 /* HDTabBarController.m in Sources */,
+				AA05 /* HDDashboardViewController.m in Sources */,
+				AA06 /* HDQuickAddViewController.m in Sources */,
+				AA07 /* HDProfileViewController.m in Sources */,
+				AA08 /* HDRingProgressView.m in Sources */,
+				AA09 /* HDWaterView.m in Sources */,
+				AA10 /* HDSleepBarView.m in Sources */,
+				AA11 /* HDMoodTrendView.m in Sources */,
+				AA12 /* HDDashboardCardView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CC40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				HEADER_SEARCH_PATHS = ("$(SRCROOT)/HealthDashboard", "$(SRCROOT)/HealthDashboard/Models", "$(SRCROOT)/HealthDashboard/Views", "$(SRCROOT)/HealthDashboard/Controllers",);
+				INFOPLIST_FILE = HealthDashboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangh.healthdashboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CC41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				HEADER_SEARCH_PATHS = ("$(SRCROOT)/HealthDashboard", "$(SRCROOT)/HealthDashboard/Models", "$(SRCROOT)/HealthDashboard/Views", "$(SRCROOT)/HealthDashboard/Controllers",);
+				INFOPLIST_FILE = HealthDashboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangh.healthdashboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CC42 /* Debug - Project */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CC43 /* Release - Project */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CC30 /* Build configuration list for PBXNativeTarget "HealthDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (CC40 /* Debug */, CC41 /* Release */,);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC31 /* Build configuration list for PBXProject "HealthDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (CC42 /* Debug */, CC43 /* Release */,);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CC21 /* Project object */;
+}
