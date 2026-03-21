@@ -15,6 +15,12 @@
 }
 @end
 
+@implementation HDExerciseRecord
+- (NSString *)typeString {
+    return self.type == 0 ? @"目标跑" : @"自由跑";
+}
+@end
+
 @implementation HDHealthDataModel
 
 + (instancetype)shared {
@@ -32,8 +38,11 @@
         _stepsGoal   = 10000;
         _waterML     = 600;
         _waterGoalML = 2000;
+        _targetRunDistanceKM = 5;
+        _targetRunMinutes = 30;
         _sleepHours  = @[@6.5, @7.2, @5.8, @8.0, @7.5, @6.0, @7.8];
         _isDarkMode  = NO;
+        _exerciseHistory = @[];
 
         // 模拟心情记录
         NSMutableArray *moods = [NSMutableArray array];
@@ -70,6 +79,14 @@
     NSMutableArray *arr = [_moodRecords mutableCopy];
     [arr addObject:r];
     _moodRecords = arr;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HDDataDidChange" object:nil];
+}
+
+- (void)saveExerciseRecord:(HDExerciseRecord *)record {
+    if (!record) return;
+    NSMutableArray *arr = [_exerciseHistory mutableCopy];
+    [arr addObject:record];
+    _exerciseHistory = arr;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"HDDataDidChange" object:nil];
 }
 

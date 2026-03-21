@@ -66,7 +66,9 @@
     CGFloat sh = self.view.bounds.size.height;
     CGFloat tabBarH = self.tabBarController.tabBar.frame.size.height;
     if (tabBarH < 1) tabBarH = safe.bottom + 49.0;
-    _fabButton.frame = CGRectMake(sw - 76, sh - tabBarH - 72, 56, 56);
+    // FAB 相对于 view 的底部定位，考虑 safe area 和 tabBar
+    CGFloat fabBottom = tabBarH + 16;  // tabBar 上方 16pt
+    _fabButton.frame = CGRectMake(sw - 76, sh - fabBottom - 56, 56, 56);
 }
 
 - (void)dealloc {

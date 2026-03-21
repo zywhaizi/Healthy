@@ -19,29 +19,20 @@
 
 ```
 全局层（Always Apply）
-├── .cursor/rules/global-always.mdc        # ObjC 规范、HD 前缀、禁止事项
-├── .cursor/hooks.json                     # Guardrails（系统级强制拦截）
-├── .agents/skills/health-data-model/      # HDHealthDataModel 数据模型知识库
-├── .agents/skills/ios-objc-patterns/      # Singleton / Delegate / Theme 模式
-└── .agents/skills/design-system/          # 颜色 / 字体 / Dark Mode 规范
+├── .cursor/rules/global-always.mdc
+├── .agents/skills/health-data-model/SKILL.md
+├── .agents/skills/ios-objc-patterns/SKILL.md
+└── .agents/skills/design-system/SKILL.md
 
 页面层（按文件/目录自动合并）
-├── HealthDashboard/AGENTS.md              # 模块级入口
-├── HealthDashboard/Controllers/AGENTS.md  # 控制器层入口
-├── .cursor/rules/page-dashboard.mdc       # 仪表盘页面约束
-├── .cursor/rules/page-profile.mdc         # 个人中心页面约束
-├── .cursor/rules/page-quickadd.mdc        # 快速录入页面约束
-├── .cursor/rules/page-tabbar.mdc          # TabBar 页面约束
-├── HealthDashboard/.agents/skills/page-dashboard/   # 仪表盘知识库
-├── HealthDashboard/.agents/skills/page-profile/     # 个人中心知识库
-├── HealthDashboard/.agents/skills/page-quickadd/    # 快速录入知识库
-├── HealthDashboard/.agents/skills/page-tabbar/      # TabBar 知识库
-└── HealthDashboard/.agents/skills/views-components/ # 自定义 View 组件知识库
+├── .cursor/rules/page-{dashboard|profile|quickadd|tabbar|exercise}.mdc
+├── HealthDashboard/.agents/skills/page-{dashboard|profile|quickadd|tabbar|exercise}/SKILL.md
+└── HealthDashboard/.agents/skills/views-components/SKILL.md
 
-专职执行层（任务委托）
-├── .cursor/agents/verifier.md             # 验收完成度
-├── .cursor/agents/refactor-advisor.md     # 重构决策
-└── .cursor/agents/debugger.md             # 排障专家
+导航索引层
+├── AGENTS.md (全局入口)
+├── HealthDashboard/AGENTS.md (模块入口)
+└── HealthDashboard/Controllers/AGENTS.md (控制器入口)
 ```
 
 ---
@@ -50,74 +41,59 @@
 
 ### 🔒 行为约束层 · Rules
 
-| 文件 | 触发方式 | 职责 |
-|---|---|---|
-| `.cursor/rules/global-always.mdc` | 每次对话自动注入 | ObjC规范、HD前缀、禁止事项、Guardrails、Quality Gate |
-| `.cursor/rules/page-dashboard.mdc` | 打开 HDDashboard* 文件 | 仪表盘页面专属约束 |
-| `.cursor/rules/page-profile.mdc` | 打开 HDProfile* 文件 | 个人中心专属约束 |
-| `.cursor/rules/page-quickadd.mdc` | 打开 HDQuickAdd* 文件 | 快速录入专属约束 |
-| `.cursor/rules/page-tabbar.mdc` | 打开 HDTabBar* 文件 | TabBar 专属约束 |
+| 文件 | 职责 |
+|---|---|
+| `global-always.mdc` | ObjC 规范、HD 前缀、禁止事项、Quality Gate |
+| `page-dashboard.mdc` | 仪表盘页面约束 |
+| `page-profile.mdc` | 个人中心页面约束 |
+| `page-quickadd.mdc` | 快速录入页面约束 |
+| `page-tabbar.mdc` | TabBar 页面约束 |
+| `page-exercise.mdc` | 运动模块页面约束 |
 
 ### 🗂 导航索引层 · AGENTS.md
 
-| 文件 | 触发方式 | 职责 |
-|---|---|---|
-| `AGENTS.md`（本文件）| Agent 启动自动加载 | 全局入口、体系地图、能力清单 |
-| `HealthDashboard/AGENTS.md` | 打开模块文件 | 数据流、页面导航 |
-| `HealthDashboard/Controllers/AGENTS.md` | 打开任意 VC 文件 | VC 通信规则、Skill 导航 |
+| 文件 | 职责 |
+|---|---|
+| `AGENTS.md` (根目录) | 全局入口、体系地图、能力清单 |
+| `HealthDashboard/AGENTS.md` | 模块级入口、数据流、页面导航 |
+| `HealthDashboard/Controllers/AGENTS.md` | 控制器层入口、VC 通信规则 |
 
 ### 🧠 知识库层 · Skills（全局）
 
-| Skill | 触发方式 | 职责 |
-|---|---|---|
-| `.agents/skills/health-data-model/` | 读写健康数据时 | HDHealthDataModel 接口、数据关系图 |
-| `.agents/skills/ios-objc-patterns/` | 实现设计模式时 | Singleton/Delegate/Theme/Notification |
-| `.agents/skills/design-system/` | 处理 UI 样式时 | 颜色、字体、间距、Dark Mode |
+| Skill | 职责 |
+|---|---|
+| `health-data-model/SKILL.md` | HDHealthDataModel 接口、数据关系图 |
+| `ios-objc-patterns/SKILL.md` | Singleton/Delegate/Theme/Notification 模式 |
+| `design-system/SKILL.md` | 颜色、字体、间距、Dark Mode 规范 |
 
 ### 📱 知识库层 · Skills（页面级）
 
-| Skill | 触发方式 | 职责 |
+| Skill | 文件 | 职责 |
 |---|---|---|
-| `HealthDashboard/.agents/skills/page-dashboard/` | 修改仪表盘时 | 数据绑定、卡片布局、UI 规格 |
-| `HealthDashboard/.agents/skills/page-profile/` | 修改个人中心时 | 主题切换、目标设置、统计展示 |
-| `HealthDashboard/.agents/skills/page-quickadd/` | 修改录入页时 | Delegate SOP、校验规则 |
-| `HealthDashboard/.agents/skills/page-tabbar/` | 修改 TabBar 时 | 角标、协调逻辑、Tab 结构 |
-| `HealthDashboard/.agents/skills/views-components/` | 修改自定义 View 时 | 5个组件接口说明 |
-
-### 🛡 安全护栏层 · Hooks
-
-| 脚本 | 触发时机 | 职责 |
-|---|---|---|
-| `.cursor/hooks/guard.sh` | Shell 命令执行前 | 拦截危险命令（rm -rf 等）|
-| `.cursor/hooks/block-sensitive.sh` | 文件读取前 | 屏蔽 .env/证书/secrets |
-| `.cursor/hooks/format.sh` | .m/.h 文件编辑后 | 自动 clang-format |
-| `.cursor/hooks/quality-gate.sh` | Agent 完成任务时 | NS_ASSUME_NONNULL 检查、performSelector 检测 |
-
-### 🤖 专职执行层 · Subagents
-
-| Agent | 触发方式 | 职责 |
-|---|---|---|
-| `.cursor/agents/verifier.md` | `@verifier` | 验收代码是否符合规范，输出结构化报告 |
-| `.cursor/agents/refactor-advisor.md` | `@refactor-advisor` | 分析架构问题，提供重构方案（HITL 确认后执行）|
-| `.cursor/agents/debugger.md` | `@debugger` | 系统性排查 Bug，最小化修复 |
+| 仪表盘 | `page-dashboard/SKILL.md` | 数据绑定、UI 组件、刷新时机 |
+| 个人中心 | `page-profile/SKILL.md` | 主题切换、目标设置、数据统计 |
+| 快速录入 | `page-quickadd/SKILL.md` | Delegate 通信、表单校验 |
+| TabBar | `page-tabbar/SKILL.md` | Tab 结构、协调逻辑、主题通知 |
+| 运动模块 | `page-exercise/SKILL.md` | 页面职责、Delegate、计时器、卡路里 |
+| 自定义 View | `views-components/SKILL.md` | 5个组件接口说明 |
 
 ---
 
 ## 核心约定（Agent 必读）
 
-1. **前缀**: 所有类名使用 `HD` 前缀（HDDashboardViewController、HDHealthDataModel 等）
-2. **数据单例**: 全局数据统一通过 `[HDHealthDataModel shared]` 读写，禁止在 VC 中直接持有数据
-3. **主题**: UI 主题切换通过 `applyTheme` 方法，响应 `isDarkMode` 属性
-4. **Delegate**: 跨 VC 通信使用 Delegate 模式（参考 `HDQuickAddDelegate`）
-5. **禁止事项**: 不得引入第三方库（除非明确获得人工确认）；不得修改 `Info.plist` 关键字段
+1. **前缀**: 所有类名使用 `HD` 前缀
+2. **数据单例**: 全局数据通过 `[HDHealthDataModel shared]` 读写
+3. **主题**: UI 主题切换通过 `applyTheme` 方法
+4. **Delegate**: 跨 VC 通信使用 Delegate 模式
+5. **禁止事项**: 不得引入第三方库、不得修改 `Info.plist` 关键字段
 
 ---
 
 ## 扩展指南（新增页面时）
 
 ```
-1. 新建 .cursor/rules/page-{name}.mdc（参考 page-dashboard.mdc）
+1. 新建 .cursor/rules/page-{name}.mdc
 2. 新建 HealthDashboard/.agents/skills/page-{name}/SKILL.md
-3. 在 HDTabBarController 注册新 Tab（需人工确认）
+3. 在 HDTabBarController 注册新 Tab
 4. 在本文件能力清单中补充对应行
 ```

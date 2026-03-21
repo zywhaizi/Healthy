@@ -7,6 +7,7 @@
 
 #import "HDTabBarController.h"
 #import "HDDashboardViewController.h"
+#import "HDExerciseTypeViewController.h"
 #import "HDProfileViewController.h"
 #import "../Models/HDHealthDataModel.h"
 
@@ -34,14 +35,23 @@
     dashNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
                                                        image:[UIImage systemImageNamed:@"heart.fill"]
                                                          tag:0];
+    
+    // 运动
+    HDExerciseTypeViewController *exercise = [HDExerciseTypeViewController new];
+    UINavigationController *exerciseNav = [[UINavigationController alloc] initWithRootViewController:exercise];
+    exerciseNav.navigationBarHidden = NO;
+    exerciseNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"运动"
+                                                           image:[UIImage systemImageNamed:@"figure.walk"]
+                                                             tag:1];
+    
     // 个人中心
     HDProfileViewController *profile = [HDProfileViewController new];
     UINavigationController *profNav  = [[UINavigationController alloc] initWithRootViewController:profile];
     profNav.navigationBarHidden = YES;
     profNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
                                                        image:[UIImage systemImageNamed:@"person.circle.fill"]
-                                                         tag:1];
-    self.viewControllers = @[dashNav, profNav];
+                                                         tag:2];
+    self.viewControllers = @[dashNav, exerciseNav, profNav];
 }
 
 - (void)applyTabBarStyle {
@@ -50,26 +60,22 @@
     if (@available(iOS 15, *)) {
         UITabBarAppearance *app = [UITabBarAppearance new];
         [app configureWithOpaqueBackground];
-        app.backgroundColor = dark
-            ? [UIColor colorWithRed:0.08 green:0.11 blue:0.18 alpha:1.0]
-            : [UIColor colorWithRed:0.97 green:0.97 blue:0.99 alpha:1.0];
+        app.backgroundColor = UIColor.systemBackgroundColor;
         tb.standardAppearance   = app;
         tb.scrollEdgeAppearance = app;
     } else {
-        tb.barTintColor = dark
-            ? [UIColor colorWithRed:0.08 green:0.11 blue:0.18 alpha:1.0]
-            : [UIColor colorWithRed:0.97 green:0.97 blue:0.99 alpha:1.0];
+        tb.barTintColor = UIColor.systemBackgroundColor;
         tb.translucent = NO;
     }
-    tb.tintColor               = [UIColor colorWithRed:0.22 green:0.54 blue:0.95 alpha:1.0];
-    tb.unselectedItemTintColor = [UIColor colorWithWhite:0.45 alpha:1.0];
+    tb.tintColor               = UIColor.systemBlueColor;
+    tb.unselectedItemTintColor = UIColor.secondaryLabelColor;
 }
 
 - (void)themeChanged {
     [self applyTabBarStyle];
     for (UINavigationController *nav in self.viewControllers) {
         if ([nav.topViewController respondsToSelector:@selector(applyTheme)]) {
-            [nav.topViewController performSelector:@selector(applyTheme)];
+            [(id)nav.topViewController applyTheme];
         }
     }
 }

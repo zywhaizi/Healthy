@@ -6,6 +6,7 @@
 ## VC 间通信规则
 
 - **QuickAdd → Dashboard**：通过 `HDQuickAddDelegate` 协议
+- **Exercise → Dashboard**：通过 `HDExerciseDelegate` 协议
 - **主题切换**：由 `HDTabBarController` 统一协调所有子VC
 - **禁止**：VC 之间直接持有引用（除 delegate weak 引用外）
 
@@ -16,3 +17,4 @@
 - 修改 Profile → 输入 `/page-profile`
 - 修改 QuickAdd → 输入 `/page-quickadd`
 - 修改 TabBar → 输入 `/page-tabbar`
+- 修改 Exercise → 输入 `/page-exercise`

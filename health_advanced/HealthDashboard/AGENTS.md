@@ -20,6 +20,7 @@ View 层禁止直接访问 `[HDHealthDataModel shared]`。
 | 个人中心 | `page-profile.mdc` | `/page-profile` |
 | 快速录入 | `page-quickadd.mdc` | `/page-quickadd` |
 | TabBar | `page-tabbar.mdc` | `/page-tabbar` |
+| 运动模块 | `page-exercise.mdc` | `/page-exercise` |
 
 ## 更多详情
 

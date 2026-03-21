@@ -16,6 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSString *emojiString;
 @end
 
+/// 运动记录
+@interface HDExerciseRecord : NSObject
+@property (nonatomic, assign) NSInteger type;           // 0=目标跑, 1=自由跑
+@property (nonatomic, assign) NSInteger durationSeconds; // 运动时长（秒）
+@property (nonatomic, assign) CGFloat distanceKM;       // 运动距离（km）
+@property (nonatomic, assign) NSInteger caloriesBurned; // 消耗卡路里
+@property (nonatomic, strong) NSDate *timestamp;        // 运动时间
+@property (nonatomic, readonly) NSString *typeString;   // "目标跑" 或 "自由跑"
+@end
+
 /// 全局健康数据单例
 @interface HDHealthDataModel : NSObject
 
@@ -38,6 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<HDMoodRecord *> *moodRecords;
 @property (nonatomic, readonly, nullable) HDMoodRecord *latestMood;
 
+// 运动
+@property (nonatomic, assign) NSInteger targetRunDistanceKM;  // 目标跑距离目标（km）
+@property (nonatomic, assign) NSInteger targetRunMinutes;     // 目标跑时间目标（分钟）
+@property (nonatomic, strong) NSArray<HDExerciseRecord *> *exerciseHistory; // 运动历史
+
 // 主题
 @property (nonatomic, assign) BOOL isDarkMode;
 
@@ -45,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addWater:(CGFloat)ml;
 - (void)addSteps:(NSInteger)steps;
 - (void)addMood:(NSInteger)level;
+- (void)saveExerciseRecord:(HDExerciseRecord *)record;
 - (CGFloat)caloryForSteps:(NSInteger)steps;
 
 @end
