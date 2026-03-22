@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        // AppDelegate 已迁移为 Swift 类，通过字符串引用
+        return UIApplicationMain(argc, argv, nil, @"HealthDashboard.AppDelegate");
     }
 }

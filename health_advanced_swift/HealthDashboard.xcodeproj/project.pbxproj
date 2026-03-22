@@ -13,25 +13,22 @@
 		0437DAC92F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC42F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift */; };
 		0437DACA2F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC52F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift */; };
 		0437DACB2F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC62F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift */; };
-		04C90C8F2F6F08D200673AC4 /* HDExerciseTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C8E2F6F08D200673AC4 /* HDExerciseTypeView.m */; };
+		0437DACD2F7026420052AB86 /* HDTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DACC2F7026420052AB86 /* HDTabBarController.swift */; };
+		0437DACF2F7026520052AB86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DACE2F7026520052AB86 /* AppDelegate.swift */; };
+		0437DAD62F70267C0052AB86 /* HDExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD12F70267C0052AB86 /* HDExerciseTypeView.swift */; };
+		0437DAD72F70267C0052AB86 /* HDWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD52F70267C0052AB86 /* HDWaterView.swift */; };
+		0437DAD82F70267C0052AB86 /* HDMoodTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD22F70267C0052AB86 /* HDMoodTrendView.swift */; };
+		0437DAD92F70267C0052AB86 /* HDDashboardCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD02F70267C0052AB86 /* HDDashboardCardView.swift */; };
+		0437DADA2F70267C0052AB86 /* HDRingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */; };
+		0437DADB2F70267C0052AB86 /* HDSleepBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */; };
 		04C90C942F6F757600673AC4 /* HDProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C932F6F757600673AC4 /* HDProfileViewController.swift */; };
-
-
-
-
 		AA01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB01 /* main.m */; };
-		AA02 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB02 /* AppDelegate.m */; };
+		AA02 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AA03 /* HDHealthDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB03 /* HDHealthDataModel.m */; };
-		AA04 /* HDTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB04 /* HDTabBarController.m */; };
-		AA08 /* HDRingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB08 /* HDRingProgressView.m */; };
-		AA09 /* HDWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB09 /* HDWaterView.m */; };
-		AA10 /* HDSleepBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB10 /* HDSleepBarView.m */; };
-		AA11 /* HDMoodTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB11 /* HDMoodTrendView.m */; };
-		AA12 /* HDDashboardCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB12 /* HDDashboardCardView.m */; };
+		AA04 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AA13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB13 /* LaunchScreen.storyboard */; };
 		AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB14 /* UIKit.framework */; };
 		AA15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB15 /* Foundation.framework */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,37 +38,25 @@
 		0437DAC52F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseSummaryViewController.swift; sourceTree = "<group>"; };
 		0437DAC62F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseTimerViewController.swift; sourceTree = "<group>"; };
 		0437DAC72F6FFC1A0052AB86 /* HDExerciseTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseTypeViewController.swift; sourceTree = "<group>"; };
-		04C90C8D2F6F08D200673AC4 /* HDExerciseTypeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDExerciseTypeView.h; sourceTree = "<group>"; };
-		04C90C8E2F6F08D200673AC4 /* HDExerciseTypeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDExerciseTypeView.m; sourceTree = "<group>"; };
+		0437DACC2F7026420052AB86 /* HDTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDTabBarController.swift; sourceTree = "<group>"; };
+		0437DACE2F7026520052AB86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0437DAD02F70267C0052AB86 /* HDDashboardCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDDashboardCardView.swift; sourceTree = "<group>"; };
+		0437DAD12F70267C0052AB86 /* HDExerciseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseTypeView.swift; sourceTree = "<group>"; };
+		0437DAD22F70267C0052AB86 /* HDMoodTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDMoodTrendView.swift; sourceTree = "<group>"; };
+		0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRingProgressView.swift; sourceTree = "<group>"; };
+		0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDSleepBarView.swift; sourceTree = "<group>"; };
+		0437DAD52F70267C0052AB86 /* HDWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDWaterView.swift; sourceTree = "<group>"; };
 		04C90C932F6F757600673AC4 /* HDProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDProfileViewController.swift; sourceTree = "<group>"; };
 		04C90C952F6F761800673AC4 /* HealthDashboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HealthDashboard-Bridging-Header.h"; sourceTree = "<group>"; };
-
-
 		BB01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BB01H /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		BB02 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BB03 /* HDHealthDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDHealthDataModel.m; sourceTree = "<group>"; };
 		BB03H /* HDHealthDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDHealthDataModel.h; sourceTree = "<group>"; };
-		BB04 /* HDTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDTabBarController.m; sourceTree = "<group>"; };
-		BB04H /* HDTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDTabBarController.h; sourceTree = "<group>"; };
-		BB08 /* HDRingProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDRingProgressView.m; sourceTree = "<group>"; };
-		BB08H /* HDRingProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDRingProgressView.h; sourceTree = "<group>"; };
-		BB09 /* HDWaterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDWaterView.m; sourceTree = "<group>"; };
-		BB09H /* HDWaterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDWaterView.h; sourceTree = "<group>"; };
-		BB10 /* HDSleepBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDSleepBarView.m; sourceTree = "<group>"; };
-		BB10H /* HDSleepBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDSleepBarView.h; sourceTree = "<group>"; };
-		BB11 /* HDMoodTrendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDMoodTrendView.m; sourceTree = "<group>"; };
-		BB11H /* HDMoodTrendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDMoodTrendView.h; sourceTree = "<group>"; };
-		BB12 /* HDDashboardCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDDashboardCardView.m; sourceTree = "<group>"; };
-		BB12H /* HDDashboardCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDDashboardCardView.h; sourceTree = "<group>"; };
 		BB13 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BB15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BB16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB20 /* HealthDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-
 		FAD11DEECB6E2507C84B0E70 /* HealthDashboard/Controllers/HDExerciseTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthDashboard/Controllers/HDExerciseTypeViewController.m; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,10 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				FAD11DEECB6E2507C84B0E70 /* HealthDashboard/Controllers/HDExerciseTypeViewController.m */,
-				C80E8A24BF59976C921AC9AA /* HealthDashboard/Controllers/HDExerciseSettingViewController.m */,
-				FE1F969DF916D68C698C0B07 /* HealthDashboard/Controllers/HDExerciseTimerViewController.m */,
-				55E44BD493DCC61BFCBEAF09 /* HealthDashboard/Controllers/HDExerciseSummaryViewController.m */,
-				B89523B70D6B5BAA3986D9B5 /* HealthDashboard/Views/HDExerciseTypeView.m */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -102,6 +83,7 @@
 		CC10 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0437DACC2F7026420052AB86 /* HDTabBarController.swift */,
 				0437DAC42F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift */,
 				0437DAC52F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift */,
 				0437DAC62F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift */,
@@ -109,8 +91,6 @@
 				0437DAC22F6FF5160052AB86 /* HDDashboardViewController.swift */,
 				0437DAC02F6FEC030052AB86 /* HDQuickAddViewController.swift */,
 				04C90C932F6F757600673AC4 /* HDProfileViewController.swift */,
-				BB04H /* HDTabBarController.h */,
-				BB04 /* HDTabBarController.m */,
 				04C90C952F6F761800673AC4 /* HealthDashboard-Bridging-Header.h */,
 			);
 			path = Controllers;
@@ -128,18 +108,12 @@
 		CC12 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				04C90C8D2F6F08D200673AC4 /* HDExerciseTypeView.h */,
-				04C90C8E2F6F08D200673AC4 /* HDExerciseTypeView.m */,
-				BB08H /* HDRingProgressView.h */,
-				BB08 /* HDRingProgressView.m */,
-				BB09H /* HDWaterView.h */,
-				BB09 /* HDWaterView.m */,
-				BB10H /* HDSleepBarView.h */,
-				BB10 /* HDSleepBarView.m */,
-				BB11H /* HDMoodTrendView.h */,
-				BB11 /* HDMoodTrendView.m */,
-				BB12H /* HDDashboardCardView.h */,
-				BB12 /* HDDashboardCardView.m */,
+				0437DAD02F70267C0052AB86 /* HDDashboardCardView.swift */,
+				0437DAD12F70267C0052AB86 /* HDExerciseTypeView.swift */,
+				0437DAD22F70267C0052AB86 /* HDMoodTrendView.swift */,
+				0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */,
+				0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */,
+				0437DAD52F70267C0052AB86 /* HDWaterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,11 +121,10 @@
 		CC13 /* HealthDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0437DACE2F7026520052AB86 /* AppDelegate.swift */,
 				CC10 /* Controllers */,
 				CC11 /* Models */,
 				CC12 /* Views */,
-				BB01H /* AppDelegate.h */,
-				BB02 /* AppDelegate.m */,
 				BB01 /* main.m */,
 				BB13 /* LaunchScreen.storyboard */,
 				BB16 /* Info.plist */,
@@ -249,26 +222,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA01 /* main.m in Sources */,
-				AA02 /* AppDelegate.m in Sources */,
+				AA02 /* (null) in Sources */,
+				0437DACF2F7026520052AB86 /* AppDelegate.swift in Sources */,
 				0437DAC12F6FEC030052AB86 /* HDQuickAddViewController.swift in Sources */,
 				AA03 /* HDHealthDataModel.m in Sources */,
-				AA04 /* HDTabBarController.m in Sources */,
-				04C90C8F2F6F08D200673AC4 /* HDExerciseTypeView.m in Sources */,
-				AA08 /* HDRingProgressView.m in Sources */,
+				AA04 /* (null) in Sources */,
+				0437DACD2F7026420052AB86 /* HDTabBarController.swift in Sources */,
+				0437DAD62F70267C0052AB86 /* HDExerciseTypeView.swift in Sources */,
+				0437DAD72F70267C0052AB86 /* HDWaterView.swift in Sources */,
+				0437DAD82F70267C0052AB86 /* HDMoodTrendView.swift in Sources */,
+				0437DAD92F70267C0052AB86 /* HDDashboardCardView.swift in Sources */,
+				0437DADA2F70267C0052AB86 /* HDRingProgressView.swift in Sources */,
+				0437DADB2F70267C0052AB86 /* HDSleepBarView.swift in Sources */,
 				04C90C942F6F757600673AC4 /* HDProfileViewController.swift in Sources */,
-				AA09 /* HDWaterView.m in Sources */,
-				AA10 /* HDSleepBarView.m in Sources */,
-				AA11 /* HDMoodTrendView.m in Sources */,
-				AA12 /* HDDashboardCardView.m in Sources */,
-				AE9E579DBA123C7007AA2588 /* HealthDashboard/Controllers/HDExerciseTypeViewController.m in Sources */,
 				0437DAC82F6FFC1A0052AB86 /* HDExerciseTypeViewController.swift in Sources */,
 				0437DAC92F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift in Sources */,
 				0437DACA2F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift in Sources */,
 				0437DACB2F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift in Sources */,
-				53BEAC32747CCEBFA122F817 /* HealthDashboard/Controllers/HDExerciseSettingViewController.m in Sources */,
-				3C369EDC87F32B521977C9E6 /* HealthDashboard/Controllers/HDExerciseTimerViewController.m in Sources */,
-				41DD5200769A52DAA6E4F235 /* HealthDashboard/Controllers/HDExerciseSummaryViewController.m in Sources */,
-				883F1976A51835ECAD21FAC2 /* HealthDashboard/Views/HDExerciseTypeView.m in Sources */,
 				0437DAC32F6FF5160052AB86 /* HDDashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

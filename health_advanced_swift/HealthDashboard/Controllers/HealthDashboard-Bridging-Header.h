@@ -8,12 +8,7 @@
 #ifndef HealthDashboard_Bridging_Header_h
 #define HealthDashboard_Bridging_Header_h
 
+// OC Model 单例，Swift 侧通过此头文件访问
 #import "HDHealthDataModel.h"
-#import "../Views/HDRingProgressView.h"
-#import "../Views/HDWaterView.h"
-#import "../Views/HDSleepBarView.h"
-#import "../Views/HDMoodTrendView.h"
-#import "../Views/HDDashboardCardView.h"
-#import "../Views/HDExerciseTypeView.h"
 
 #endif /* HealthDashboard_Bridging_Header_h */
