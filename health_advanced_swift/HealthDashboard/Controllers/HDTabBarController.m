@@ -6,9 +6,7 @@
 //
 
 #import "HDTabBarController.h"
-#import "HDDashboardViewController.h"
-#import "HDExerciseTypeViewController.h"
-// HDProfileViewController 现在是 Swift 类，通过 Bridging Header 访问
+// 所有 ViewController 现在是 Swift 类，通过 NSClassFromString 动态加载
 #import "../Models/HDHealthDataModel.h"
 
 @implementation HDTabBarController
@@ -24,8 +22,10 @@
 }
 
 - (void)setupTabs {
-    // 首页
-    HDDashboardViewController *dash = [HDDashboardViewController new];
+    // 首页 (Swift 类)
+    Class dashClass = NSClassFromString(@"HealthDashboard.HDDashboardViewController");
+    if (!dashClass) dashClass = NSClassFromString(@"HDDashboardViewController");
+    UIViewController *dash = [[dashClass alloc] init];
     dash.extendedLayoutIncludesOpaqueBars = YES;
     dash.edgesForExtendedLayout = UIRectEdgeAll;
     UINavigationController *dashNav = [[UINavigationController alloc] initWithRootViewController:dash];
@@ -36,8 +36,10 @@
                                                        image:[UIImage systemImageNamed:@"heart.fill"]
                                                          tag:0];
     
-    // 运动
-    HDExerciseTypeViewController *exercise = [HDExerciseTypeViewController new];
+    // 运动 (Swift 类)
+    Class exerciseClass = NSClassFromString(@"HealthDashboard.HDExerciseTypeViewController");
+    if (!exerciseClass) exerciseClass = NSClassFromString(@"HDExerciseTypeViewController");
+    UIViewController *exercise = [[exerciseClass alloc] init];
     UINavigationController *exerciseNav = [[UINavigationController alloc] initWithRootViewController:exercise];
     exerciseNav.navigationBarHidden = NO;
     exerciseNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"运动"
@@ -80,11 +82,8 @@
 
 - (void)themeChanged {
     [self applyTabBarStyle];
-    for (UINavigationController *nav in self.viewControllers) {
-        if ([nav.topViewController respondsToSelector:@selector(applyTheme)]) {
-            [(id)nav.topViewController applyTheme];
-        }
-    }
+    // 广播主题变更通知，各 Swift VC 自行响应
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HDThemeDidChange" object:nil];
 }
 
 - (void)dealloc {

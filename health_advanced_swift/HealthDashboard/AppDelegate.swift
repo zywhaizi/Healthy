@@ -1,0 +1,24 @@
+//
+//  AppDelegate.swift
+//  HealthDashboard
+//
+//  Created by AI Assistant on 2026/3/22.
+//
+
+import UIKit
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = HDTabBarController()
+        window?.makeKeyAndVisible()
+        return true
+    }
+}

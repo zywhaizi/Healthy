@@ -24,10 +24,13 @@ description: OC 到 Swift 迁移统一执行版。以编译通过和功能可用
 - Dashboard / Exercise：`viewWillAppear` 中调用 `refreshData()` + `applyTheme()`
 - QuickAdd：`delegate` 属性声明为 `weak`
 
-### Step 3. 校验 target membership
-- Swift 文件加入 `HealthDashboard` target（非 Test target）
+### Step 3. 校验 target membership（必须提醒用户手动操作）
+- ⚠️ **Agent 无法修改 `project.pbxproj`**，Swift 文件创建后必须输出以下提醒：
+  > 请在 Xcode 中手动将 `HD{PageName}ViewController.swift` 加入工程 Target：
+  > 选中文件 → File Inspector（右侧面板）→ Target Membership → 勾选 `HealthDashboard`（非 Test target）
 - Bridging Header 路径：`HealthDashboard/Controllers/HealthDashboard-Bridging-Header.h`
-- Bridging Header 中已导入 `HDHealthDataModel.h`
+- Bridging Header 中已导入 `HDHealthDataModel.h` 及所需 View 头文件
+- **未加入 Target 的典型症状**：`NSClassFromString` 返回 nil、编译时找不到类
 
 ### Step 4. 首次编译门禁
 - 目标：0 error，失败先修复不得进入下一步
@@ -54,9 +57,11 @@ description: OC 到 Swift 迁移统一执行版。以编译通过和功能可用
 - Delegate 回调可达（QuickAdd/Exercise → Dashboard 数据刷新）
 - 各页面专项详见 `./CHECKLIST.md` Step 7
 
-### Step 8. 清理旧 OC（需用户确认）
-- 删除 `.h/.m` 前必须询问用户
-- 删除后再次确认编译 0 error
+### Step 8. 清理旧 OC（六项验收通过后直接执行）
+- 六项验收（A-F）全部通过后，**直接删除** `.h/.m`，无需询问用户
+- 删除前用 `grep` 检查其他 OC 文件是否仍在 `#import` 目标头文件
+- 删除对应 `#import` 行（通常在 `HDTabBarController.m` 或入口文件中）
+- 删除后再次运行 `swiftc -typecheck` 确认 0 error
 - 确认无其他 OC 文件仍在 `#import` 已删除头文件
 
 ---

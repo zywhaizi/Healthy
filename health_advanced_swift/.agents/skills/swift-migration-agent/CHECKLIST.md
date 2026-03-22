@@ -36,7 +36,11 @@
 
 ## Step 3｜Target Membership 检查
 
-- [ ] Swift 文件已加入 `HealthDashboard` target（非 Test target）
+> ⚠️ **Agent 无法修改 `project.pbxproj`**，Swift 文件创建后必须由用户手动操作：
+> 在 Xcode 中选中新建的 `.swift` 文件 → File Inspector（右侧面板）→ Target Membership → 勾选 `HealthDashboard`（非 Test target）
+> **未加入 Target 的典型症状**：`NSClassFromString` 返回 nil、编译时找不到类
+
+- [ ] ⚠️ 已提醒用户将 Swift 文件加入 `HealthDashboard` target
 - [ ] Bridging Header 路径有效：`HealthDashboard/Controllers/HealthDashboard-Bridging-Header.h`
 - [ ] Bridging Header 中已导入 `HDHealthDataModel.h`（以及其他必需 OC 头文件）
 - [ ] 无重复类名与 OC 端冲突
@@ -108,10 +112,11 @@
 
 ---
 
-## Step 8｜OC 文件清理（需用户确认）
+## Step 8｜OC 文件清理（六项验收通过后直接执行，无需用户确认）
 
-- [ ] 已获得明确的用户确认，允许删除 `.h/.m`
-- [ ] 删除后重新编译，**0 error**
+- [ ] 用 `grep` 确认其他 OC 文件是否仍在 `#import` 目标头文件，若有则先删除对应 `#import` 行
+- [ ] 直接删除 `.h/.m` 文件（无需询问用户）
+- [ ] 删除后运行 `swiftc -typecheck` 确认 **0 error**
 - [ ] 没有其他 OC 文件仍在 `#import` 已删除的头文件
 
 ---

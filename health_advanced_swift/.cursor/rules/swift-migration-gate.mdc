@@ -37,8 +37,15 @@ alwaysApply: false
 
 ### 安全约束
 - 禁止修改 `project.pbxproj`
-- 禁止擅自删除 `.h/.m/.storyboard/.plist`（需用户确认）
+- 禁止删除 `.storyboard/.plist` 文件
 - 禁止引入第三方依赖
+- OC `.h/.m` 文件：六项验收全部通过后**直接删除**，无需等待用户确认
+
+### 工程注册约束（必须提醒用户）
+- Agent **无法自动修改** `project.pbxproj`，Swift 文件创建后必须提醒用户：
+  > ⚠️ 请在 Xcode 中手动将新建的 `.swift` 文件加入工程 Target：
+  > 选中文件 → File Inspector（右侧面板）→ Target Membership → 勾选 `HealthDashboard`
+- 未加入 Target 会导致 `NSClassFromString` 返回 nil
 
 ---
 

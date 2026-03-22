@@ -43,6 +43,7 @@ class HDProfileViewModel: ObservableObject {
 
 // MARK: - ViewController
 
+@MainActor
 class HDProfileViewController: UIViewController {
     private let viewModel = HDProfileViewModel()
     private var cancellables = Set<AnyCancellable>()
@@ -310,7 +311,7 @@ class HDProfileViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("HDThemeDidChange"), object: nil)
     }
     
-    func applyTheme() {
+    @objc func applyTheme() {
         view.backgroundColor = viewModel.backgroundColor
         scrollView.backgroundColor = viewModel.backgroundColor
         contentView.backgroundColor = viewModel.backgroundColor
