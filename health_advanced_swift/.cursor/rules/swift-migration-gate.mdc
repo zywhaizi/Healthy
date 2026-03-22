@@ -1,0 +1,83 @@
+---
+description: OC→Swift 迁移编译门禁。聚焦零报错、可编译、功能可用。
+globs:
+  - "HealthDashboard/**/*.swift"
+  - "HealthDashboard/**/*.m"
+  - "HealthDashboard/**/*.h"
+alwaysApply: false
+---
+
+# Swift Migration Gate（编译优先）
+
+> 目标：迁移后 **不报错、可编译、功能正常**。
+> 执行流程见：`.agents/skills/swift-migration-agent/SKILL.md`
+> 验收清单见：`.agents/skills/swift-migration-agent/CHECKLIST.md`
+
+## 适用范围
+
+以下任一操作必须启用本门禁：
+- 将 Objective-C 页面迁移为 Swift
+- 修改迁移页面的入口引用（Tab、路由、工厂创建）
+- 删除或替换已有 OC ViewController 文件
+
+---
+
+## 硬约束（必须）
+
+### 编译约束
+- 不允许带着编译错误进入下一步
+- Bridging Header 路径：`HealthDashboard/Controllers/HealthDashboard-Bridging-Header.h`
+- Swift 类找不到时优先检查：模块名 `HealthDashboard`、类名、target membership
+
+### 架构约束
+- 数据写入必须通过 `HDHealthDataModel` 方法：`addWater` / `addSteps` / `addMood`
+- 不得在 View 中直接访问 Model
+- 所有迁移后的 ViewController 必须实现 `applyTheme`
+- 不得删除已有 `applyTheme` 实现
+
+### 安全约束
+- 禁止修改 `project.pbxproj`
+- 禁止擅自删除 `.h/.m/.storyboard/.plist`（需用户确认）
+- 禁止引入第三方依赖
+
+---
+
+## 六项验收（全部通过才可报告完成）
+
+- [ ] A. 编译通过：0 error
+- [ ] B. 页面可实例化：`NSClassFromString` 创建对象非 nil
+- [ ] C. 生命周期正常：`viewDidLoad`、`viewWillAppear` 可执行
+- [ ] D. 主题正常：`applyTheme` 生效，深浅色切换正常
+- [ ] E. 数据链路正常：读写符合 `HDHealthDataModel` 约束
+- [ ] F. 回调正常：Delegate 回传链路可用（QuickAdd/Exercise → Dashboard）
+
+---
+
+## 输出模板（每次迁移必须输出）
+
+```md
+[迁移对象]
+- 页面：HDxxxViewController
+- 入口引用文件：HDTabBarController.m
+
+[执行结果]
+- Step1 读取引用：✅/❌
+- Step2 Swift骨架：✅/❌
+- Step3 target检查：✅/❌
+- Step4 首次编译：✅/❌
+- Step5 入口替换：✅/❌
+- Step6 二次编译：✅/❌
+- Step7 功能冒烟：✅/❌
+- Step8 OC清理：✅/❌（如未执行说明原因）
+
+[六项验收]
+- A 编译：✅/❌
+- B 实例化：✅/❌
+- C 生命周期：✅/❌
+- D 主题：✅/❌
+- E 数据链路：✅/❌
+- F 委托回调：✅/❌
+
+[遗留风险]
+- 无 / 列出风险项
+```

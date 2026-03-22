@@ -8,7 +8,7 @@
 #import "HDTabBarController.h"
 #import "HDDashboardViewController.h"
 #import "HDExerciseTypeViewController.h"
-#import "HDProfileViewController.h"
+// HDProfileViewController 现在是 Swift 类，通过 Bridging Header 访问
 #import "../Models/HDHealthDataModel.h"
 
 @implementation HDTabBarController
@@ -44,14 +44,21 @@
                                                            image:[UIImage systemImageNamed:@"figure.walk"]
                                                              tag:1];
     
-    // 个人中心
-    HDProfileViewController *profile = [HDProfileViewController new];
-    UINavigationController *profNav  = [[UINavigationController alloc] initWithRootViewController:profile];
-    profNav.navigationBarHidden = YES;
-    profNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
-                                                       image:[UIImage systemImageNamed:@"person.circle.fill"]
-                                                         tag:2];
-    self.viewControllers = @[dashNav, exerciseNav, profNav];
+    // 个人中心 (Swift 类)
+    // 使用 NSClassFromString 动态获取 Swift 类
+    Class profileClass = NSClassFromString(@"HealthDashboard.HDProfileViewController");
+    if (profileClass) {
+        UIViewController *profile = [[profileClass alloc] init];
+        UINavigationController *profNav = [[UINavigationController alloc] initWithRootViewController:profile];
+        profNav.navigationBarHidden = YES;
+        profNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
+                                                           image:[UIImage systemImageNamed:@"person.circle.fill"]
+                                                             tag:2];
+        self.viewControllers = @[dashNav, exerciseNav, profNav];
+    } else {
+        // 如果找不到 Swift 类，只显示前两个 Tab
+        self.viewControllers = @[dashNav, exerciseNav];
+    }
 }
 
 - (void)applyTabBarStyle {

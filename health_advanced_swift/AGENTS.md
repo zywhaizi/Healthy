@@ -21,15 +21,22 @@
 ```
 全局层（Always Apply）
 ├── .cursor/rules/global-always.mdc
-├── .cursor/rules/swift-always.mdc (新增)
-├── .cursor/rules/mvvm-architecture.mdc (新增)
-├── .cursor/rules/combine-binding.mdc (新增)
+├── .cursor/rules/swift-always.mdc
+├── .cursor/rules/mvvm-architecture.mdc
+├── .cursor/rules/combine-binding.mdc
 ├── .agents/skills/health-data-model/SKILL.md
 ├── .agents/skills/ios-objc-patterns/SKILL.md
-├── .agents/skills/swift-language/SKILL.md (新增)
-├── .agents/skills/mvvm-pattern/SKILL.md (新增)
-├── .agents/skills/combine-binding/SKILL.md (新增)
+├── .agents/skills/swift-language/SKILL.md
+├── .agents/skills/mvvm-pattern/SKILL.md
+├── .agents/skills/combine-binding/SKILL.md
 └── .agents/skills/design-system/SKILL.md
+
+迁移链路（触发迁移任务时）
+├── .cursor/rules/swift-migration-gate.mdc        ← 门禁规则
+├── .agents/skills/swift-migration-agent/SKILL.md ← 主执行流程
+├── .agents/skills/swift-migration-agent/CHECKLIST.md ← 验收清单（含页面专项）
+├── .agents/skills/swift-oc-migration-agent/SKILL.md  ← 已合并，重定向至主文档
+└── .agents/skills/swift-oc-reference-migration/SKILL.md ← 已合并，重定向至主文档
 
 页面层（按文件/目录自动合并）
 ├── .cursor/rules/page-{dashboard|profile|quickadd|tabbar|exercise}.mdc
@@ -46,10 +53,21 @@
 
 ## 完整能力清单（统一管理视图）
 
+### 🚧 迁移优先链路（Compile-First）
+
+当任务涉及 OC → Swift 迁移时，必须优先执行以下链路：
+
+1. 先应用规则：`.cursor/rules/swift-migration-gate.mdc`
+2. 再按 Skill 执行：`.agents/skills/swift-migration-agent/SKILL.md`
+3. 全程使用检查单：`.agents/skills/swift-migration-agent/CHECKLIST.md`
+
+> 迁移任务默认目标：**0 编译错误 + 功能可用 + 主题与回调链路正常**。
+
 ### 🔒 行为约束层 · Rules
 
 | 文件 | 职责 |
 |---|---|
+| `swift-migration-gate.mdc` | OC→Swift 迁移阻断门禁（先编译、再替换、后验收） |
 | `global-always.mdc` | ObjC 规范、HD 前缀、禁止事项、Quality Gate |
 | `swift-always.mdc` | Swift 规范、HD 前缀、禁止事项、Quality Gate |
 | `mvvm-architecture.mdc` | MVVM 架构规范、各层职责 |
@@ -72,6 +90,7 @@
 
 | Skill | 职责 |
 |---|---|
+| `swift-migration-agent/SKILL.md` | OC→Swift 迁移统一执行版（8 步流程） |
 | `health-data-model/SKILL.md` | HDHealthDataModel 接口、数据关系图 |
 | `ios-objc-patterns/SKILL.md` | Singleton/Delegate/Theme/Notification 模式 |
 | `swift-language/SKILL.md` | Swift 语言特性和最佳实践 |

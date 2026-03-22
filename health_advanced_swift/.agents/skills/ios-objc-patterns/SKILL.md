@@ -44,17 +44,9 @@ quickAddVC.delegate = dashboardVC;
 ```objc
 // 所有 VC 必须实现此方法
 - (void)applyTheme {
-    BOOL dark = [HDHealthDataModel shared].isDarkMode;
-    
-    // 背景色
-    self.view.backgroundColor = dark
-        ? [UIColor systemBackgroundColor]
-        : [UIColor systemBackgroundColor];
-    
-    // 标题色
-    self.titleLabel.textColor = dark
-        ? [UIColor labelColor]
-        : [UIColor labelColor];
+    // 语义色自动适配 Dark Mode，无需手动判断 dark 分支
+    self.view.backgroundColor = UIColor.systemBackgroundColor;
+    self.titleLabel.textColor = UIColor.labelColor;
     
     // 递归应用子 View
     [self.cardView applyTheme];

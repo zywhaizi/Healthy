@@ -29,8 +29,7 @@ alwaysApply: true
 
 ### Model 层
 - 数据逻辑只在 Model 层
-- ViewModel 不持有原始数据，统一通过 `HDHealthDataModel.shared` 访问
-- 使用 `Codable` 协议支持序列化
+- ViewModel 不持有原始数据，统一通过 `HDHealthDataModel.shared()` 访问（OC 单例，Swift 调用需带括号）
 
 ### ViewModel 层
 - 使用 `@Published` 属性进行数据绑定
@@ -48,7 +47,7 @@ alwaysApply: true
 ## 主题系统
 
 - 所有 ViewController 必须实现 `applyTheme` 方法
-- 主题状态通过 `HDHealthDataModel.shared.isDarkMode` 读取
+- 主题状态通过 `HDHealthDataModel.shared().isDarkMode` 读取
 - 颜色不得硬编码，使用语义化颜色
 
 ## 数据操作
@@ -60,7 +59,7 @@ alwaysApply: true
 ## Combine 数据绑定
 
 - 使用 `@Published` 进行数据绑定
-- 使用 `@ObservedObject` 或 `@StateObject` 注入 ViewModel
+- ViewController 通过持有 ViewModel 实例并手动订阅 `@Published` 属性驱动 UI
 - 使用 `AnyCancellable` 管理订阅生命周期
 
 ## 禁止事项
@@ -77,6 +76,6 @@ alwaysApply: true
 - [ ] 没有硬编码颜色值
 - [ ] 没有硬编码字符串
 - [ ] ViewModel 使用了 `@Published`
-- [ ] ViewController 使用了 `@ObservedObject` 或 `@StateObject`
+- [ ] ViewController 持有 ViewModel 实例并通过 Combine 订阅驱动 UI（不使用 SwiftUI 属性包装器）
 - [ ] 修改了 UI 相关代码 → 确认实现了 `applyTheme`
 - [ ] 修改了数据相关代码 → 确认通过 Model 方法写入

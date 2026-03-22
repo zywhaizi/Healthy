@@ -113,11 +113,11 @@ Delegate:
 
 ```objc
 - (void)applyTheme {
-    BOOL dark = [HDHealthDataModel shared].isDarkMode;
-    UIColor *bg = dark ? [UIColor colorWithRed:0.06 green:0.08 blue:0.14 alpha:1.0]
-                       : [UIColor colorWithRed:0.93 green:0.95 blue:0.97 alpha:1.0];
-    self.view.backgroundColor = bg;
-    // 更新其他 UI 元素颜色
+    // 必须使用语义色，禁止硬编码 RGB 值
+    self.view.backgroundColor = UIColor.systemGroupedBackgroundColor;
+    self.titleLabel.textColor = UIColor.labelColor;
+    self.subtitleLabel.textColor = UIColor.secondaryLabelColor;
+    // 其他 UI 元素同样使用语义色
 }
 ```
 
