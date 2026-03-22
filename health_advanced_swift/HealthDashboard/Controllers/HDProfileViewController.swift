@@ -11,6 +11,7 @@ import Combine
 // MARK: - ViewModel
 // 简化版 ViewModel，只负责存储 UI 状态，不访问 Model
 
+@MainActor
 class HDProfileViewModel: ObservableObject {
     @Published var todayStepsText: String = "0"
     @Published var waterMLText: String = "0ml"

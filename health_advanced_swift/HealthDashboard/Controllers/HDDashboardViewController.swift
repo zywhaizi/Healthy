@@ -10,6 +10,7 @@ import Combine
 
 // MARK: - ViewModel
 
+@MainActor
 class HDDashboardViewModel: ObservableObject {
     @Published var stepsText: String = "0"
     @Published var stepsSubText: String = "目标10000步 · 消耗0千卡"

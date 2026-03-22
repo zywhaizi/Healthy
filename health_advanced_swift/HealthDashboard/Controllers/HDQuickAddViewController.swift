@@ -17,6 +17,7 @@ import Combine
 
 // MARK: - ViewModel
 
+@MainActor
 class HDQuickAddViewModel: ObservableObject {
     @Published var stepsValue: Int = 2000
     @Published var stepsDisplayText: String = "2000步"

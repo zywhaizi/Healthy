@@ -8,7 +8,6 @@
 #ifndef HealthDashboard_Bridging_Header_h
 #define HealthDashboard_Bridging_Header_h
 
-// OC Model 单例，Swift 侧通过此头文件访问
-#import "HDHealthDataModel.h"
+// 所有类已迁移为 Swift，Bridging Header 保留为空
 
 #endif /* HealthDashboard_Bridging_Header_h */

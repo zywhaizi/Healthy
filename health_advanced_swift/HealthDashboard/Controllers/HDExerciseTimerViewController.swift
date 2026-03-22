@@ -184,7 +184,7 @@ class HDExerciseTimerViewController: UIViewController {
         record.timestamp = Date()
 
         // 通过 Model 方法保存数据
-        HDHealthDataModel.shared().save(record)
+        HDHealthDataModel.shared().saveExerciseRecord(record)
 
         // 跳转到总结页
         let vc = HDExerciseSummaryViewController()

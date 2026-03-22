@@ -21,10 +21,11 @@
 		0437DAD92F70267C0052AB86 /* HDDashboardCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD02F70267C0052AB86 /* HDDashboardCardView.swift */; };
 		0437DADA2F70267C0052AB86 /* HDRingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */; };
 		0437DADB2F70267C0052AB86 /* HDSleepBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */; };
+		0437DADD2F702A080052AB86 /* HDHealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DADC2F702A080052AB86 /* HDHealthDataModel.swift */; };
 		04C90C942F6F757600673AC4 /* HDProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C932F6F757600673AC4 /* HDProfileViewController.swift */; };
 		AA01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB01 /* main.m */; };
 		AA02 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		AA03 /* HDHealthDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BB03 /* HDHealthDataModel.m */; };
+		AA03 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AA04 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AA13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB13 /* LaunchScreen.storyboard */; };
 		AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB14 /* UIKit.framework */; };
@@ -46,11 +47,10 @@
 		0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRingProgressView.swift; sourceTree = "<group>"; };
 		0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDSleepBarView.swift; sourceTree = "<group>"; };
 		0437DAD52F70267C0052AB86 /* HDWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDWaterView.swift; sourceTree = "<group>"; };
+		0437DADC2F702A080052AB86 /* HDHealthDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDHealthDataModel.swift; sourceTree = "<group>"; };
 		04C90C932F6F757600673AC4 /* HDProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDProfileViewController.swift; sourceTree = "<group>"; };
 		04C90C952F6F761800673AC4 /* HealthDashboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HealthDashboard-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BB03 /* HDHealthDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HDHealthDataModel.m; sourceTree = "<group>"; };
-		BB03H /* HDHealthDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDHealthDataModel.h; sourceTree = "<group>"; };
 		BB13 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BB15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -99,8 +99,7 @@
 		CC11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BB03H /* HDHealthDataModel.h */,
-				BB03 /* HDHealthDataModel.m */,
+				0437DADC2F702A080052AB86 /* HDHealthDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,9 +224,10 @@
 				AA02 /* (null) in Sources */,
 				0437DACF2F7026520052AB86 /* AppDelegate.swift in Sources */,
 				0437DAC12F6FEC030052AB86 /* HDQuickAddViewController.swift in Sources */,
-				AA03 /* HDHealthDataModel.m in Sources */,
+				AA03 /* (null) in Sources */,
 				AA04 /* (null) in Sources */,
 				0437DACD2F7026420052AB86 /* HDTabBarController.swift in Sources */,
+				0437DADD2F702A080052AB86 /* HDHealthDataModel.swift in Sources */,
 				0437DAD62F70267C0052AB86 /* HDExerciseTypeView.swift in Sources */,
 				0437DAD72F70267C0052AB86 /* HDWaterView.swift in Sources */,
 				0437DAD82F70267C0052AB86 /* HDMoodTrendView.swift in Sources */,
