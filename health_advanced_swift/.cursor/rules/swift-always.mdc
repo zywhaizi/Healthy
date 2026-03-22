@@ -1,0 +1,82 @@
+---
+description: Swift 全局规范。所有 Swift 代码必须遵守此规范。
+globs: "**/*.swift"
+alwaysApply: true
+---
+
+# Swift 全局规范
+
+## 命名约定
+
+- 所有自定义类使用 `HD` 前缀：`HDXxxViewController`、`HDXxxView`、`HDXxxViewModel`
+- ViewController 命名：`HD{PageName}ViewController`
+- ViewModel 命名：`HD{PageName}ViewModel`
+- View 命名：`HD{Component}View`
+- Protocol 命名：`HD{Name}Delegate`
+- 私有属性用下划线前缀：`_propertyName`
+- 常量用 `kHD` 前缀：`kHDDefaultStepsGoal`
+
+## 代码风格
+
+- 使用 4 空格缩进
+- 每行最多 120 个字符
+- 使用 `// MARK: -` 分组方法
+- 属性声明顺序：`@Published` → `private` → `public`
+- 方法实现顺序：`init` → `lifecycle` → `public methods` → `private methods`
+- 注释使用中文，关键方法必须有文档注释
+
+## MVVM 架构约束
+
+### Model 层
+- 数据逻辑只在 Model 层
+- ViewModel 不持有原始数据，统一通过 `HDHealthDataModel.shared` 访问
+- 使用 `Codable` 协议支持序列化
+
+### ViewModel 层
+- 使用 `@Published` 属性进行数据绑定
+- 所有业务逻辑在 ViewModel 中
+- ViewController 不直接访问 Model，只通过 ViewModel
+
+### View 层
+- 自定义 View 不直接访问 Model 或 ViewModel
+- 数据由 ViewController 传入
+
+### ViewController 层
+- 负责协调 View 和 ViewModel
+- 实现 `applyTheme` 方法响应主题切换
+
+## 主题系统
+
+- 所有 ViewController 必须实现 `applyTheme` 方法
+- 主题状态通过 `HDHealthDataModel.shared.isDarkMode` 读取
+- 颜色不得硬编码，使用语义化颜色
+
+## 数据操作
+
+- 写入数据只能用 Model 提供的方法
+- 读取进度用 readonly 属性
+- 不得在 ViewController 中直接修改 Model 的 readwrite 属性
+
+## Combine 数据绑定
+
+- 使用 `@Published` 进行数据绑定
+- 使用 `@ObservedObject` 或 `@StateObject` 注入 ViewModel
+- 使用 `AnyCancellable` 管理订阅生命周期
+
+## 禁止事项
+
+- 禁止引入第三方库（需人工确认后方可）
+- 禁止修改 `Info.plist` 关键字段
+- 禁止在主线程做耗时操作
+- 禁止硬编码字符串
+- 禁止在 View 中直接访问 Model 或 ViewModel
+
+## Quality Gate（质量门禁）
+
+- [ ] 新增类使用了 `HD` 前缀
+- [ ] 没有硬编码颜色值
+- [ ] 没有硬编码字符串
+- [ ] ViewModel 使用了 `@Published`
+- [ ] ViewController 使用了 `@ObservedObject` 或 `@StateObject`
+- [ ] 修改了 UI 相关代码 → 确认实现了 `applyTheme`
+- [ ] 修改了数据相关代码 → 确认通过 Model 方法写入

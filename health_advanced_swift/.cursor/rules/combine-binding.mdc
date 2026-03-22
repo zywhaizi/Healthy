@@ -1,0 +1,262 @@
+---
+description: Combine 数据绑定规范。所有 Swift 数据绑定必须使用 Combine。
+globs: "**/*.swift"
+alwaysApply: true
+---
+
+# Combine 数据绑定规范
+
+## 基本概念
+
+Combine 是 Apple 的响应式编程框架，用于处理异步事件和数据流。
+
+```
+Publisher (发布者)
+  ↓ (发送值)
+Subscriber (订阅者)
+  ↓ (接收值)
+UI 自动更新
+```
+
+## @Published 属性
+
+### 基本用法
+
+```swift
+class HDDashboardViewModel: ObservableObject {
+    @Published var stepsText: String = ""
+    @Published var waterText: String = ""
+    @Published var isLoading: Bool = false
+}
+```
+
+### 在 View 中使用
+
+```swift
+struct HDDashboardView: View {
+    @ObservedObject var viewModel: HDDashboardViewModel
+    
+    var body: some View {
+        VStack {
+            Text(viewModel.stepsText)  // 自动订阅
+            if viewModel.isLoading {
+                ProgressView()
+            }
+        }
+    }
+}
+```
+
+## 订阅管理
+
+### 使用 AnyCancellable
+
+```swift
+class HDDashboardViewModel: ObservableObject {
+    @Published var stepsProgress: CGFloat = 0
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let model = HDHealthDataModel.shared
+    
+    init() {
+        // 订阅 Model 的数据变化
+        model.$todaySteps
+            .map { CGFloat($0) / 10000.0 }  // 转换
+            .assign(to: &$stepsProgress)    // 赋值给 @Published
+    }
+}
+```
+
+### 手动管理订阅
+
+```swift
+private var cancellables = Set<AnyCancellable>()
+
+model.$todaySteps
+    .sink { newValue in
+        print("步数更新: \(newValue)")
+    }
+    .store(in: &cancellables)
+```
+
+## 常用操作符
+
+### map（转换）
+
+```swift
+model.$todaySteps
+    .map { "\($0) 步" }
+    .assign(to: &$stepsText)
+```
+
+### filter（过滤）
+
+```swift
+model.$waterML
+    .filter { $0 > 0 }
+    .map { "\($0) ml" }
+    .assign(to: &$waterText)
+```
+
+### combineLatest（合并）
+
+```swift
+Publishers.CombineLatest(
+    model.$todaySteps,
+    model.$stepsGoal
+)
+.map { CGFloat($0) / CGFloat($1) }
+.assign(to: &$stepsProgress)
+```
+
+### debounce（防抖）
+
+```swift
+searchTextField.textPublisher
+    .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+    .sink { searchText in
+        viewModel.search(searchText)
+    }
+    .store(in: &cancellables)
+```
+
+## 错误处理
+
+### 使用 catch
+
+```swift
+func fetchData() -> AnyPublisher<[HDExerciseRecord], Error> {
+    URLSession.shared.dataTaskPublisher(for: url)
+        .map { $0.data }
+        .decode(type: [HDExerciseRecord].self, decoder: JSONDecoder())
+        .catch { error in
+            Just([])  // 返回空数组
+        }
+        .eraseToAnyPublisher()
+}
+```
+
+### 使用 replaceError
+
+```swift
+model.$todaySteps
+    .replaceError(with: 0)
+    .assign(to: &$stepsText)
+```
+
+## 主题切换示例
+
+```swift
+class HDDashboardViewModel: ObservableObject {
+    @Published var backgroundColor: Color = .white
+    @Published var textColor: Color = .black
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let model = HDHealthDataModel.shared
+    
+    init() {
+        // 监听主题变化
+        model.$isDarkMode
+            .map { isDark in
+                isDark ? Color.black : Color.white
+            }
+            .assign(to: &$backgroundColor)
+        
+        model.$isDarkMode
+            .map { isDark in
+                isDark ? Color.white : Color.black
+            }
+            .assign(to: &$textColor)
+    }
+}
+```
+
+## 性能优化
+
+### 避免过度订阅
+
+```swift
+// ❌ 错误：每次都创建新的订阅
+var body: some View {
+    Text(viewModel.stepsText)
+        .onReceive(model.$todaySteps) { _ in
+            viewModel.refreshData()
+        }
+}
+
+// ✅ 正确：在 init 中订阅一次
+init() {
+    model.$todaySteps
+        .sink { _ in
+            self.refreshData()
+        }
+        .store(in: &cancellables)
+}
+```
+
+### 使用 removeDuplicates
+
+```swift
+model.$todaySteps
+    .removeDuplicates()  // 只在值改变时发送
+    .map { "\($0)" }
+    .assign(to: &$stepsText)
+```
+
+## 常见错误
+
+### ❌ 错误：忘记存储 cancellable
+
+```swift
+model.$todaySteps
+    .sink { print($0) }
+    // 没有 .store(in: &cancellables)
+    // 订阅会立即被释放
+```
+
+### ✅ 正确：存储 cancellable
+
+```swift
+model.$todaySteps
+    .sink { print($0) }
+    .store(in: &cancellables)
+```
+
+### ❌ 错误：在 View 中创建 ViewModel
+
+```swift
+struct HDDashboardView: View {
+    @State var viewModel = HDDashboardViewModel()  // 错误
+}
+```
+
+### ✅ 正确：在 ViewController 中创建
+
+```swift
+class HDDashboardViewController: UIViewController {
+    @StateObject var viewModel = HDDashboardViewModel()  // 正确
+}
+```
+
+## 调试技巧
+
+### 打印订阅值
+
+```swift
+model.$todaySteps
+    .print("步数")  // 打印所有事件
+    .map { "\($0)" }
+    .assign(to: &$stepsText)
+```
+
+### 使用 handleEvents
+
+```swift
+model.$todaySteps
+    .handleEvents(
+        receiveSubscription: { _ in print("订阅开始") },
+        receiveOutput: { print("收到值: \($0)") },
+        receiveCompletion: { print("完成: \($0)") }
+    )
+    .assign(to: &$stepsText)
+```

@@ -1,0 +1,273 @@
+---
+description: MVVM 架构规范。所有 Swift 代码必须遵守 MVVM 架构。
+globs: "**/*.swift"
+alwaysApply: true
+---
+
+# MVVM 架构规范
+
+## 架构层次
+
+```
+View 层 (UIView/UIViewController)
+  ↓ (绑定)
+ViewModel 层 (@Published 属性)
+  ↓ (调用方法)
+Model 层 (HDHealthDataModel.shared)
+  ↓ (读写数据)
+本地存储/网络
+```
+
+## 各层职责
+
+### Model 层（数据层）
+
+**职责**：
+- 数据存储和管理
+- 业务逻辑计算
+- 数据持久化
+
+**规范**：
+```swift
+class HDHealthDataModel {
+    static let shared = HDHealthDataModel()
+    
+    // 数据属性（readwrite）
+    @Published var todaySteps: Int = 0
+    @Published var waterML: CGFloat = 0
+    
+    // 只读属性（计算属性）
+    var stepsProgress: CGFloat {
+        return CGFloat(todaySteps) / CGFloat(stepsGoal)
+    }
+    
+    // 数据写入方法
+    func addWater(_ ml: CGFloat) {
+        waterML += ml
+        save()
+    }
+}
+```
+
+**禁止**：
+- ❌ 在 Model 中写 UI 代码
+- ❌ 在 Model 中调用 ViewController
+- ❌ 在 Model 中使用 @Published（除非是全局状态）
+
+### ViewModel 层（业务逻辑层）
+
+**职责**：
+- 处理用户交互
+- 调用 Model 方法
+- 提供 UI 所需的数据
+
+**规范**：
+```swift
+class HDDashboardViewModel: ObservableObject {
+    @Published var stepsText: String = ""
+    @Published var waterText: String = ""
+    
+    private let model = HDHealthDataModel.shared
+    
+    func refreshData() {
+        stepsText = "\(model.todaySteps)"
+        waterText = "\(model.waterML)"
+    }
+    
+    func addWater(_ ml: CGFloat) {
+        model.addWater(ml)
+        refreshData()
+    }
+}
+```
+
+**禁止**：
+- ❌ 在 ViewModel 中写 UI 代码
+- ❌ 在 ViewModel 中直接修改 Model 属性
+- ❌ 在 ViewModel 中持有 ViewController 引用
+
+### View 层（UI 层）
+
+**职责**：
+- 展示数据
+- 接收用户交互
+- 调用 ViewModel 方法
+
+**规范**：
+```swift
+struct HDDashboardView: View {
+    @ObservedObject var viewModel: HDDashboardViewModel
+    
+    var body: some View {
+        VStack {
+            Text(viewModel.stepsText)
+            Button("加水") {
+                viewModel.addWater(250)
+            }
+        }
+    }
+}
+```
+
+**禁止**：
+- ❌ 在 View 中访问 Model
+- ❌ 在 View 中写业务逻辑
+- ❌ 在 View 中做数据计算
+
+### ViewController 层（协调层）
+
+**职责**：
+- 协调 View 和 ViewModel
+- 管理生命周期
+- 实现主题切换
+
+**规范**：
+```swift
+class HDDashboardViewController: UIViewController {
+    @StateObject var viewModel = HDDashboardViewModel()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.refreshData()
+        applyTheme()
+    }
+    
+    func applyTheme() {
+        let isDark = HDHealthDataModel.shared.isDarkMode
+        view.backgroundColor = isDark ? .black : .white
+    }
+}
+```
+
+## 数据流向
+
+### 用户操作流程
+
+```
+用户点击按钮
+  ↓
+View 调用 ViewModel 方法
+  ↓
+ViewModel 调用 Model 方法
+  ↓
+Model 修改数据并保存
+  ↓
+ViewModel 更新 @Published 属性
+  ↓
+View 自动刷新（Combine 绑定）
+```
+
+### 示例：添加步数
+
+```swift
+// 1. View 层
+Button("加步数") {
+    viewModel.addSteps(100)  // 调用 ViewModel
+}
+
+// 2. ViewModel 层
+func addSteps(_ count: Int) {
+    model.addSteps(count)    // 调用 Model
+    refreshData()            // 更新 @Published 属性
+}
+
+// 3. Model 层
+func addSteps(_ count: Int) {
+    todaySteps += count      // 修改数据
+    save()                   // 保存到本地
+}
+
+// 4. View 自动刷新
+@Published var stepsText: String = ""  // 绑定到 View
+```
+
+## Combine 数据绑定
+
+### 基本绑定
+
+```swift
+class HDDashboardViewModel: ObservableObject {
+    @Published var stepsText: String = ""
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        HDHealthDataModel.shared.$todaySteps
+            .map { "\($0)" }
+            .assign(to: &$stepsText)
+    }
+}
+```
+
+### 复杂绑定
+
+```swift
+@Published var stepsProgress: CGFloat = 0
+
+init() {
+    HDHealthDataModel.shared.$todaySteps
+        .combineLatest(HDHealthDataModel.shared.$stepsGoal)
+        .map { CGFloat($0) / CGFloat($1) }
+        .assign(to: &$stepsProgress)
+}
+```
+
+## 主题切换
+
+```swift
+class HDDashboardViewModel: ObservableObject {
+    @Published var backgroundColor: Color = .white
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        HDHealthDataModel.shared.$isDarkMode
+            .map { $0 ? Color.black : Color.white }
+            .assign(to: &$backgroundColor)
+    }
+}
+```
+
+## 常见错误
+
+### ❌ 错误：在 View 中访问 Model
+
+```swift
+struct HDDashboardView: View {
+    var body: some View {
+        Text("\(HDHealthDataModel.shared.todaySteps)")  // 禁止
+    }
+}
+```
+
+### ✅ 正确：通过 ViewModel
+
+```swift
+struct HDDashboardView: View {
+    @ObservedObject var viewModel: HDDashboardViewModel
+    
+    var body: some View {
+        Text(viewModel.stepsText)  // 正确
+    }
+}
+```
+
+### ❌ 错误：在 ViewModel 中直接修改 Model
+
+```swift
+class HDDashboardViewModel: ObservableObject {
+    func addSteps(_ count: Int) {
+        HDHealthDataModel.shared.todaySteps += count  // 禁止
+    }
+}
+```
+
+### ✅ 正确：调用 Model 方法
+
+```swift
+class HDDashboardViewModel: ObservableObject {
+    func addSteps(_ count: Int) {
+        HDHealthDataModel.shared.addSteps(count)  // 正确
+    }
+}
+```

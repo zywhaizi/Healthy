@@ -1,0 +1,29 @@
+---
+description: 仪表盘页面专属约束，修改 HDDashboard 相关文件时自动生效
+globs: "**/HDDashboard*"
+alwaysApply: false
+---
+
+# Dashboard 页面约束
+
+## 禁止事项
+
+- 禁止在此 VC 中直接修改 `HDHealthDataModel` 的数据（如 `model.todaySteps = 1000`）
+- 禁止在 View 中直接访问 `[HDHealthDataModel shared]`
+- 禁止硬编码颜色值（使用语义色）
+- 禁止在 `refreshData` 中做耗时操作
+
+## 必须遵守
+
+- 必须在 `viewWillAppear:` 中调用 `refreshData()` 和 `applyTheme()`
+- 必须实现 `applyTheme` 方法响应主题切换
+- 必须通过 `HDHealthDataModel.shared` 的 readonly 属性读取数据（`stepsProgress`、`waterProgress` 等）
+- 卡片间距：16pt，圆角：12pt，内边距：16pt
+- 卡片不使用阴影（Dark Mode 下不明显）
+
+## 质量门禁
+
+- [ ] 数据读取只通过 Model 的 readonly 属性
+- [ ] 没有硬编码颜色值
+- [ ] 实现了 `applyTheme` 方法
+- [ ] 没有在 View 中访问 Model
