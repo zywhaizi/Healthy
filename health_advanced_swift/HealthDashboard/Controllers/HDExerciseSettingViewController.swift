@@ -26,7 +26,7 @@ class HDExerciseSettingViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         applyTheme()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: NSNotification.Name("HDThemeDidChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
     }
 
     override func viewDidLayoutSubviews() {
@@ -39,7 +39,7 @@ class HDExerciseSettingViewController: UIViewController {
     private func setupUI() {
         title = "设置目标"
 
-        let model = HDHealthDataModel.shared()
+        let model = HDHealthDataModel.shared
 
         distanceTitleLabel.text = "目标距离 (km)"
         distanceTitleLabel.font = .systemFont(ofSize: 16, weight: .semibold)
@@ -99,7 +99,7 @@ class HDExerciseSettingViewController: UIViewController {
         }
 
         // 保存目标到 Model
-        let model = HDHealthDataModel.shared()
+        let model = HDHealthDataModel.shared
         model.targetRunDistanceKM = distance
         model.targetRunMinutes = time
 

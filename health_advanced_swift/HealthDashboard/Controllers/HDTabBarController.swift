@@ -19,7 +19,7 @@ class HDTabBarController: UITabBarController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(themeChanged),
-            name: NSNotification.Name("HDThemeDidChange"),
+            name: .hdThemeDidChange,
             object: nil
         )
     }

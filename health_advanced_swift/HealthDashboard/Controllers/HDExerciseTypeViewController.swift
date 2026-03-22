@@ -25,7 +25,7 @@ class HDExerciseTypeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         applyTheme()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: NSNotification.Name("HDThemeDidChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -37,7 +37,7 @@ class HDExerciseTimerViewController: UIViewController {
         setupUI()
         applyTheme()
         startTimer()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: NSNotification.Name("HDThemeDidChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
     }
 
     override func viewDidLayoutSubviews() {
@@ -148,7 +148,7 @@ class HDExerciseTimerViewController: UIViewController {
 
         // 更新进度条（仅目标跑）
         if exerciseType == 0 {
-            let model = HDHealthDataModel.shared()
+            let model = HDHealthDataModel.shared
             let targetDist = CGFloat(model.targetRunDistanceKM)
             if targetDist > 0 {
                 progressView.progress = Float(min(1.0, currentDistance / targetDist))
@@ -184,7 +184,7 @@ class HDExerciseTimerViewController: UIViewController {
         record.timestamp = Date()
 
         // 通过 Model 方法保存数据
-        HDHealthDataModel.shared().saveExerciseRecord(record)
+        HDHealthDataModel.shared.saveExerciseRecord(record)
 
         // 跳转到总结页
         let vc = HDExerciseSummaryViewController()

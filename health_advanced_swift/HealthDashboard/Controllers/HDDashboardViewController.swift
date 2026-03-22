@@ -19,16 +19,16 @@ class HDDashboardViewModel: ObservableObject {
     @Published var waterProgress: CGFloat = 0
     @Published var waterText: String = "0/2000ml"
     @Published var waterSubText: String = "已喝 0 ml"
-    @Published var sleepHours: [NSNumber] = []
+    @Published var sleepHours: [Double] = []
     @Published var sleepSubText: String = "昨晚 0.0 小时"
     @Published var moodRecords: [HDMoodRecord] = []
     @Published var moodSubText: String = "今天还没记录心情"
 
-    private let model = HDHealthDataModel.shared()
+    private let model = HDHealthDataModel.shared
 
     init() { refreshData() }
 
-    /// 从 OC Model 读取所有数据，更新 @Published 属性
+    /// 从 Model 读取所有数据，更新 @Published 属性
     func refreshData() {
         let m = model
         stepsText = "\(m.todaySteps)"
@@ -40,7 +40,7 @@ class HDDashboardViewModel: ObservableObject {
         waterText = String(format: "%.0f/%.0fml", m.waterML, m.waterGoalML)
         waterSubText = String(format: "已喝 %.0f ml", m.waterML)
         sleepHours = m.sleepHours
-        let lastHour = m.sleepHours.last?.floatValue ?? 0
+        let lastHour = m.sleepHours.last ?? 0
         sleepSubText = String(format: "昨晚 %.1f 小时", lastHour)
         moodRecords = m.moodRecords
         if let latest = m.latestMood {
@@ -96,11 +96,11 @@ class HDDashboardViewController: UIViewController {
         applyTheme()
         NotificationCenter.default.addObserver(
             self, selector: #selector(handleDataChange),
-            name: NSNotification.Name("HDDataDidChange"), object: nil
+            name: .hdDataDidChange, object: nil
         )
         NotificationCenter.default.addObserver(
             self, selector: #selector(applyTheme),
-            name: NSNotification.Name("HDThemeDidChange"), object: nil
+            name: .hdThemeDidChange, object: nil
         )
     }
 
@@ -152,7 +152,7 @@ class HDDashboardViewController: UIViewController {
     // MARK: - Theme
 
     @objc func applyTheme() {
-        let dark = HDHealthDataModel.shared().isDarkMode
+        let dark = HDHealthDataModel.shared.isDarkMode
         let bg    = dark ? UIColor(red: 0.06, green: 0.08, blue: 0.14, alpha: 1)
                         : UIColor(red: 0.93, green: 0.95, blue: 0.97, alpha: 1)
         let cardC = dark ? UIColor(red: 0.12, green: 0.16, blue: 0.24, alpha: 1) : .white
@@ -172,10 +172,7 @@ class HDDashboardViewController: UIViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if #available(iOS 13.0, *) {
-            return HDHealthDataModel.shared().isDarkMode ? .lightContent : .darkContent
-        }
-        return .lightContent
+        return HDHealthDataModel.shared.isDarkMode ? .lightContent : .darkContent
     }
 
     @objc private func handleDataChange() { viewModel.refreshData() }

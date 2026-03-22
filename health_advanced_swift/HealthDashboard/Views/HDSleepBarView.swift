@@ -12,7 +12,7 @@ class HDSleepBarView: UIView {
 
     // MARK: - Properties
 
-    var hoursData: [NSNumber] = []
+    var hoursData: [Double] = []
 
     // MARK: - Init
 
@@ -40,14 +40,14 @@ class HDSleepBarView: UIView {
         let w = bounds.width
         let h = bounds.height
         let barW = (w - 8 * CGFloat(count - 1)) / CGFloat(count)
-        let maxH = hoursData.map { $0.floatValue }.max().map { CGFloat($0) } ?? 10
-        let safeMaxH = maxH < 1 ? 10 : maxH
+        let safeMaxH = CGFloat(hoursData.max() ?? 10)
+        let maxBarH = safeMaxH < 1 ? CGFloat(10) : safeMaxH
         let days = ["一", "二", "三", "四", "五", "六", "日"]
         let startIdx = hoursData.count - count
 
         for i in 0..<count {
-            let hours = CGFloat(hoursData[startIdx + i].floatValue)
-            let ratio = hours / safeMaxH
+            let hours = CGFloat(hoursData[startIdx + i])
+            let ratio = hours / maxBarH
             let barH = max(4, ratio * (h - 20))
             let x = CGFloat(i) * (barW + 8)
 

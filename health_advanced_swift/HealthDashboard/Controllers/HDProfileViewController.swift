@@ -216,100 +216,54 @@ class HDProfileViewController: UIViewController {
     }
     
     private func setupBindings() {
-        // 绑定统计数据
+        // 从 Model 读取初始数据
+        refreshData()
+
+        // 绑定统计数据到 UI
         viewModel.$todayStepsText
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] text in
-                self?.statLabels[safe: 0]?.text = text
-            }
+            .sink { [weak self] text in self?.statLabels[safe: 0]?.text = text }
             .store(in: &cancellables)
-        
+
         viewModel.$waterMLText
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] text in
-                self?.statLabels[safe: 1]?.text = text
-            }
+            .sink { [weak self] text in self?.statLabels[safe: 1]?.text = text }
             .store(in: &cancellables)
-        
+
         viewModel.$sleepHoursText
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] text in
-                self?.statLabels[safe: 2]?.text = text
-            }
+            .sink { [weak self] text in self?.statLabels[safe: 2]?.text = text }
             .store(in: &cancellables)
-        
-        // 绑定主题开关
+
+        // 绑定主题开关状态
         viewModel.$isDarkMode
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isDark in
-                self?.themeSwitch.isOn = isDark
-            }
+            .sink { [weak self] isDark in self?.themeSwitch.isOn = isDark }
             .store(in: &cancellables)
-        
-        // 观察 Model 的属性变化，更新 ViewModel
-        let model = HDHealthDataModel.shared
-        
-        // 创建观察者并存储
-        var observers: [NSKeyValueObservation] = []
-        
-        // 观察步数
-        observers.append(model().observe(\.todaySteps, options: [.new]) { [weak self] _, change in
-            if let newValue = change.newValue {
-                self?.viewModel.todayStepsText = String(newValue)
-            }
-        })
-        
-        // 观察喝水
-        observers.append(model().observe(\.waterML, options: [.new]) { [weak self] _, change in
-            if let newValue = change.newValue {
-                self?.viewModel.waterMLText = String(format: "%.0fml", newValue)
-            }
-        })
-        
-        // 观察睡眠
-        observers.append(model().observe(\.sleepHours, options: [.new]) { [weak self] _, change in
-            if let newValue = change.newValue as? [NSNumber], let lastHour = newValue.last?.doubleValue {
-                self?.viewModel.sleepHoursText = String(format: "%.1fh", lastHour)
-            } else {
-                self?.viewModel.sleepHoursText = "0h"
-            }
-        })
-        
-        // 观察目标步数
-        observers.append(model().observe(\.stepsGoal, options: [.new]) { [weak self] _, change in
-            if let newValue = change.newValue {
-                self?.viewModel.stepsGoalText = String(newValue)
-            }
-        })
-        
-        // 观察目标喝水
-        observers.append(model().observe(\.waterGoalML, options: [.new]) { [weak self] _, change in
-            if let newValue = change.newValue {
-                self?.viewModel.waterGoalText = String(format: "%.0f", newValue)
-            }
-        })
-        
-        // 观察主题
-        observers.append(model().observe(\.isDarkMode, options: [.new]) { [weak self] _, change in
-            if let newValue = change.newValue {
-                self?.viewModel.isDarkMode = newValue
-                self?.viewModel.updateThemeColors()
-            }
-        })
-        
-        // 保存观察者以防止被释放
-        objc_setAssociatedObject(self, &HDProfileViewController.observersKey, observers, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+
+        // 监听数据变更通知刷新统计
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .hdDataDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
     }
-    
-    private static var observersKey: UInt8 = 0
+
+    @objc private func refreshData() {
+        let model = HDHealthDataModel.shared
+        viewModel.todayStepsText = "\(model.todaySteps)"
+        viewModel.waterMLText = String(format: "%.0fml", model.waterML)
+        viewModel.sleepHoursText = String(format: "%.1fh", model.sleepHours.last ?? 0)
+        viewModel.stepsGoalText = "\(model.stepsGoal)"
+        viewModel.waterGoalText = String(format: "%.0f", model.waterGoalML)
+        viewModel.isDarkMode = model.isDarkMode
+        viewModel.updateThemeColors()
+    }
     
     // MARK: - 主题切换
     
     @objc private func themeSwitchChanged() {
-        let model = HDHealthDataModel.shared()
+        let model = HDHealthDataModel.shared
         model.isDarkMode = !model.isDarkMode
         applyTheme()
-        NotificationCenter.default.post(name: NSNotification.Name("HDThemeDidChange"), object: nil)
+        NotificationCenter.default.post(name: .hdThemeDidChange, object: nil)
     }
     
     @objc func applyTheme() {

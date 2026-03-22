@@ -11,7 +11,7 @@ import Combine
 // MARK: - Protocol
 
 /// QuickAdd 录入完成后通知 Dashboard 刷新
-@objc @MainActor protocol HDQuickAddDelegate: AnyObject {
+@MainActor protocol HDQuickAddDelegate: AnyObject {
     func quickAddDidUpdateData()
 }
 
@@ -22,7 +22,7 @@ class HDQuickAddViewModel: ObservableObject {
     @Published var stepsValue: Int = 2000
     @Published var stepsDisplayText: String = "2000步"
 
-    private let model = HDHealthDataModel.shared()
+    private let model = HDHealthDataModel.shared
 
     /// 更新步数显示文字（步数 + 卡路里）
     func updateStepsDisplay(_ steps: Int) {
@@ -53,8 +53,8 @@ class HDQuickAddViewController: UIViewController {
 
     // MARK: - Properties
 
-    /// delegate 必须 weak，防止循环引用；@objc 让 OC 侧可访问
-    @objc weak var delegate: HDQuickAddDelegate?
+    /// delegate 必须 weak，防止循环引用
+    weak var delegate: HDQuickAddDelegate?
 
     private let viewModel = HDQuickAddViewModel()
     private var cancellables = Set<AnyCancellable>()
@@ -103,7 +103,7 @@ class HDQuickAddViewController: UIViewController {
         let sw = view.bounds.size.width
         let sh = view.bounds.size.height
         let sheetH: CGFloat = 380
-        let dark = HDHealthDataModel.shared().isDarkMode
+        let dark = HDHealthDataModel.shared.isDarkMode
         let textC: UIColor = dark ? .white : UIColor(red: 0.1, green: 0.12, blue: 0.18, alpha: 1)
 
         sheetView.frame = CGRect(x: 0, y: sh - sheetH, width: sw, height: sheetH)
