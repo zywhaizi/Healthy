@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 // MARK: - ViewController
 
@@ -29,6 +30,7 @@ class HDExerciseTimerViewController: UIViewController {
     private var elapsedSeconds: Int = 0
     private var currentDistance: CGFloat = 0
     private var isRunning: Bool = false
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
@@ -37,7 +39,11 @@ class HDExerciseTimerViewController: UIViewController {
         setupUI()
         applyTheme()
         startTimer()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
+        // 订阅主题变化
+        HDHealthDataModel.shared.$isDarkMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.applyTheme() }
+            .store(in: &cancellables)
     }
 
     override func viewDidLayoutSubviews() {

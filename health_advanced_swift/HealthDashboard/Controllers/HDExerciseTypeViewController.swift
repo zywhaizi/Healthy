@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Combine
 
 // MARK: - ViewController
 
@@ -18,6 +19,7 @@ class HDExerciseTypeViewController: UIViewController {
     private let scrollView = UIScrollView()
     private var targetRunView: HDExerciseTypeView!
     private var freeRunView: HDExerciseTypeView!
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
@@ -25,7 +27,11 @@ class HDExerciseTypeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         applyTheme()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
+        // 订阅主题变化
+        HDHealthDataModel.shared.$isDarkMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.applyTheme() }
+            .store(in: &cancellables)
     }
 
     override func viewWillAppear(_ animated: Bool) {

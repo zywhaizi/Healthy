@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 // MARK: - ViewController
 
@@ -19,6 +20,7 @@ class HDExerciseSettingViewController: UIViewController {
     private let timeTitleLabel = UILabel()
     private let timeTextField = UITextField()
     private let startButton = UIButton(type: .custom)
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
@@ -26,7 +28,10 @@ class HDExerciseSettingViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         applyTheme()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
+        HDHealthDataModel.shared.$isDarkMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.applyTheme() }
+            .store(in: &cancellables)
     }
 
     override func viewDidLayoutSubviews() {

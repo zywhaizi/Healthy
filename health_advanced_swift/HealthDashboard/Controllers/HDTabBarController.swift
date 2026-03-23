@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 @MainActor
 class HDTabBarController: UITabBarController {
+
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
@@ -16,16 +19,11 @@ class HDTabBarController: UITabBarController {
         super.viewDidLoad()
         setupTabs()
         applyTabBarStyle()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(themeChanged),
-            name: .hdThemeDidChange,
-            object: nil
-        )
-    }
-
-    nonisolated deinit {
-        NotificationCenter.default.removeObserver(self)
+        // 订阅主题变化
+        HDHealthDataModel.shared.$isDarkMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.applyTabBarStyle() }
+            .store(in: &cancellables)
     }
 
     // MARK: - Tab Setup

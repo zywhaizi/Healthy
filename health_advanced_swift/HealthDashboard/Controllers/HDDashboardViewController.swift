@@ -25,29 +25,41 @@ class HDDashboardViewModel: ObservableObject {
     @Published var moodSubText: String = "今天还没记录心情"
 
     private let model = HDHealthDataModel.shared
+    private var cancellables = Set<AnyCancellable>()
 
-    init() { refreshData() }
+    init() {
+        refreshData()
+        setupModelBindings()
+    }
+
+    /// 订阅 Model @Published 属性，数据变化自动刷新
+    private func setupModelBindings() {
+        Publishers.MergeMany(
+            model.$todaySteps.map { _ in () }.eraseToAnyPublisher(),
+            model.$waterML.map { _ in () }.eraseToAnyPublisher(),
+            model.$sleepHours.map { _ in () }.eraseToAnyPublisher(),
+            model.$moodRecords.map { _ in () }.eraseToAnyPublisher()
+        )
+        .debounce(for: .milliseconds(50), scheduler: DispatchQueue.main)
+        .sink { [weak self] in self?.refreshData() }
+        .store(in: &cancellables)
+    }
 
     /// 从 Model 读取所有数据，更新 @Published 属性
     func refreshData() {
         let m = model
         stepsText = "\(m.todaySteps)"
         let cal = m.calory(forSteps: m.todaySteps)
-        stepsSubText = String(format: "目标%ld步 · 消耗%.0f千卡", m.stepsGoal, cal)
+        stepsSubText = String(format: "目标%d步 · 消耗%.0f千卡", m.stepsGoal, cal)
         stepsProgress = m.stepsProgress
         stepsProgressPct = String(format: "%.0f%%", m.stepsProgress * 100)
         waterProgress = m.waterProgress
         waterText = String(format: "%.0f/%.0fml", m.waterML, m.waterGoalML)
         waterSubText = String(format: "已喝 %.0f ml", m.waterML)
         sleepHours = m.sleepHours
-        let lastHour = m.sleepHours.last ?? 0
-        sleepSubText = String(format: "昨晚 %.1f 小时", lastHour)
+        sleepSubText = String(format: "昨晚 %.1f 小时", m.sleepHours.last ?? 0)
         moodRecords = m.moodRecords
-        if let latest = m.latestMood {
-            moodSubText = "最新: \(latest.emojiString)"
-        } else {
-            moodSubText = "今天还没记录心情"
-        }
+        moodSubText = m.latestMood.map { "最新: \($0.emojiString)" } ?? "今天还没记录心情"
     }
 }
 
@@ -94,20 +106,16 @@ class HDDashboardViewController: UIViewController {
         buildFAB()
         setupBindings()
         applyTheme()
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(handleDataChange),
-            name: .hdDataDidChange, object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(applyTheme),
-            name: .hdThemeDidChange, object: nil
-        )
+        // 订阅主题变化（@Published 替代通知）
+        HDHealthDataModel.shared.$isDarkMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.applyTheme() }
+            .store(in: &cancellables)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        viewModel.refreshData()
         applyTheme()
     }
 
@@ -119,8 +127,6 @@ class HDDashboardViewController: UIViewController {
         let tabBarH = tabBarController?.tabBar.frame.height ?? 83
         fabButton.frame = CGRect(x: sw - 76, y: sh - tabBarH - 16 - 56, width: 56, height: 56)
     }
-
-    nonisolated deinit { NotificationCenter.default.removeObserver(self) }
 
     // MARK: - Bindings
 

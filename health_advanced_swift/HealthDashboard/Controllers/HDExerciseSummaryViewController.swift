@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 // MARK: - ViewController
 
@@ -26,6 +27,7 @@ class HDExerciseSummaryViewController: UIViewController {
     private let calorieLabel = UILabel()
     private let saveButton = UIButton(type: .custom)
     private let cancelButton = UIButton(type: .custom)
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
@@ -33,7 +35,10 @@ class HDExerciseSummaryViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         applyTheme()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
+        HDHealthDataModel.shared.$isDarkMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.applyTheme() }
+            .store(in: &cancellables)
     }
 
     override func viewDidLayoutSubviews() {

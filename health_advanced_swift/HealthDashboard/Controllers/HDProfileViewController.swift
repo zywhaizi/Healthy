@@ -241,12 +241,28 @@ class HDProfileViewController: UIViewController {
             .sink { [weak self] isDark in self?.themeSwitch.isOn = isDark }
             .store(in: &cancellables)
 
-        // 监听数据变更通知刷新统计
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .hdDataDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .hdThemeDidChange, object: nil)
+        // 订阅 Model @Published 属性替代通知
+        Publishers.MergeMany(
+            HDHealthDataModel.shared.$todaySteps.map { _ in () }.eraseToAnyPublisher(),
+            HDHealthDataModel.shared.$waterML.map { _ in () }.eraseToAnyPublisher(),
+            HDHealthDataModel.shared.$sleepHours.map { _ in () }.eraseToAnyPublisher()
+        )
+        .debounce(for: .milliseconds(50), scheduler: DispatchQueue.main)
+        .sink { [weak self] in self?.refreshData() }
+        .store(in: &cancellables)
+
+        HDHealthDataModel.shared.$isDarkMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.refreshData()
+                self?.applyTheme()
+            }
+            .store(in: &cancellables)
+
+        refreshData()
     }
 
-    @objc private func refreshData() {
+    private func refreshData() {
         let model = HDHealthDataModel.shared
         viewModel.todayStepsText = "\(model.todaySteps)"
         viewModel.waterMLText = String(format: "%.0fml", model.waterML)
@@ -260,10 +276,8 @@ class HDProfileViewController: UIViewController {
     // MARK: - 主题切换
     
     @objc private func themeSwitchChanged() {
-        let model = HDHealthDataModel.shared
-        model.isDarkMode = !model.isDarkMode
+        HDHealthDataModel.shared.isDarkMode.toggle()
         applyTheme()
-        NotificationCenter.default.post(name: .hdThemeDidChange, object: nil)
     }
     
     @objc func applyTheme() {
