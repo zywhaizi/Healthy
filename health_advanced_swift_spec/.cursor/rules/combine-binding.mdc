@@ -1,0 +1,53 @@
+---
+description: Combine 数据绑定规范。所有 Swift 数据绑定必须使用 Combine。
+globs: "**/*.swift"
+alwaysApply: true
+---
+
+# Combine 数据绑定规范
+
+## 核心约束
+
+- ViewModel 必须继承 `ObservableObject`，用 `@Published` 驱动 UI
+- 所有订阅必须用 `.store(in: &cancellables)` 或 `.assign(to: &$prop)` 保存
+- 订阅中引用 `self` 必须用 `[weak self]`，避免循环引用
+- 禁止在 `View.body` 中用 `onReceive` 创建新订阅（在 `init` 中订阅一次）
+- 订阅在主线程更新 UI 时必须加 `.receive(on: DispatchQueue.main)`
+
+## 标准写法
+
+```swift
+// ⚠️ HDHealthDataModel 是 OC 单例，没有 @Published，不能直接用 $ 订阅
+// 正确做法：refreshData() 手动读取属性，触发 @Published 更新
+class HDXxxViewModel: ObservableObject {
+    @Published var stepsText: String = ""
+    @Published var progressValue: CGFloat = 0
+
+    private var cancellables = Set<AnyCancellable>()
+    private let model = HDHealthDataModel.shared()  // OC 单例，带括号
+
+    init() {
+        refreshData()
+    }
+
+    func refreshData() {
+        stepsText = "\(model.todaySteps) 步"
+        progressValue = model.stepsProgress
+    }
+}
+```
+
+## 常见错误
+
+```swift
+// ❌ 忘记存储 cancellable，订阅立即被释放
+model.$todaySteps.sink { print($0) }
+
+// ❌ 强引用 self 导致循环引用
+model.$todaySteps.sink { [self] _ in self.update() }
+
+// ✅ 正确
+model.$todaySteps
+    .sink { [weak self] _ in self?.update() }
+    .store(in: &cancellables)
+```

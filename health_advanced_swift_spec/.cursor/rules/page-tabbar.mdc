@@ -1,0 +1,36 @@
+---
+description: TabBar 控制器专属约束，修改 HDTabBar 相关文件时自动生效
+globs: "**/HDTabBar*"
+alwaysApply: false
+---
+
+# TabBar 页面约束
+
+## 禁止事项
+
+- 禁止在 TabBar 中处理业务逻辑
+- 禁止随意调整 Tab 顺序（影响全局导航）
+- 禁止修改 Tab 数量（需人工确认）
+- 禁止使用 `performSelector`（直接调用方法）
+
+## 必须遵守
+
+- 必须在 `viewDidLoad` 中设置 `quickAdd.delegate = dashboard`
+- 必须实现 `applyTheme` 方法，遍历所有子 VC 调用其 `applyTheme`
+- Tab 顺序固定：Tab 0=Dashboard、Tab 1=QuickAdd、Tab 2=Profile
+- 主题切换时必须通知所有子 VC 刷新
+
+## Tab 结构
+
+```
+Tab 0: HDDashboardViewController   // 首页·仪表盘
+Tab 1: HDQuickAddViewController    // 快速录入
+Tab 2: HDProfileViewController     // 个人中心
+```
+
+## 质量门禁
+
+- [ ] 设置了 QuickAdd delegate
+- [ ] 实现了 `applyTheme` 方法
+- [ ] 没有使用 `performSelector`
+- [ ] Tab 顺序正确

@@ -1,0 +1,345 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0437DAC12F6FEC030052AB86 /* HDQuickAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC02F6FEC030052AB86 /* HDQuickAddViewController.swift */; };
+		0437DAC32F6FF5160052AB86 /* HDDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC22F6FF5160052AB86 /* HDDashboardViewController.swift */; };
+		0437DAC82F6FFC1A0052AB86 /* HDExerciseTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC72F6FFC1A0052AB86 /* HDExerciseTypeViewController.swift */; };
+		0437DAC92F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC42F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift */; };
+		0437DACA2F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC52F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift */; };
+		0437DACB2F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAC62F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift */; };
+		0437DACD2F7026420052AB86 /* HDTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DACC2F7026420052AB86 /* HDTabBarController.swift */; };
+		0437DACF2F7026520052AB86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DACE2F7026520052AB86 /* AppDelegate.swift */; };
+		0437DAD62F70267C0052AB86 /* HDExerciseTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD12F70267C0052AB86 /* HDExerciseTypeView.swift */; };
+		0437DAD72F70267C0052AB86 /* HDWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD52F70267C0052AB86 /* HDWaterView.swift */; };
+		0437DAD82F70267C0052AB86 /* HDMoodTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD22F70267C0052AB86 /* HDMoodTrendView.swift */; };
+		0437DAD92F70267C0052AB86 /* HDDashboardCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD02F70267C0052AB86 /* HDDashboardCardView.swift */; };
+		0437DADA2F70267C0052AB86 /* HDRingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */; };
+		0437DADB2F70267C0052AB86 /* HDSleepBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */; };
+		0437DADD2F702A080052AB86 /* HDHealthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437DADC2F702A080052AB86 /* HDHealthDataModel.swift */; };
+		04C90C942F6F757600673AC4 /* HDProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90C932F6F757600673AC4 /* HDProfileViewController.swift */; };
+		AA01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB01 /* main.m */; };
+		AA02 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		AA03 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		AA04 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		AA13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB13 /* LaunchScreen.storyboard */; };
+		AA14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB14 /* UIKit.framework */; };
+		AA15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB15 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0437DAC02F6FEC030052AB86 /* HDQuickAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDQuickAddViewController.swift; sourceTree = "<group>"; };
+		0437DAC22F6FF5160052AB86 /* HDDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDDashboardViewController.swift; sourceTree = "<group>"; };
+		0437DAC42F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseSettingViewController.swift; sourceTree = "<group>"; };
+		0437DAC52F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseSummaryViewController.swift; sourceTree = "<group>"; };
+		0437DAC62F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseTimerViewController.swift; sourceTree = "<group>"; };
+		0437DAC72F6FFC1A0052AB86 /* HDExerciseTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseTypeViewController.swift; sourceTree = "<group>"; };
+		0437DACC2F7026420052AB86 /* HDTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDTabBarController.swift; sourceTree = "<group>"; };
+		0437DACE2F7026520052AB86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0437DAD02F70267C0052AB86 /* HDDashboardCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDDashboardCardView.swift; sourceTree = "<group>"; };
+		0437DAD12F70267C0052AB86 /* HDExerciseTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDExerciseTypeView.swift; sourceTree = "<group>"; };
+		0437DAD22F70267C0052AB86 /* HDMoodTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDMoodTrendView.swift; sourceTree = "<group>"; };
+		0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRingProgressView.swift; sourceTree = "<group>"; };
+		0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDSleepBarView.swift; sourceTree = "<group>"; };
+		0437DAD52F70267C0052AB86 /* HDWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDWaterView.swift; sourceTree = "<group>"; };
+		0437DADC2F702A080052AB86 /* HDHealthDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDHealthDataModel.swift; sourceTree = "<group>"; };
+		04C90C932F6F757600673AC4 /* HDProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDProfileViewController.swift; sourceTree = "<group>"; };
+		04C90C952F6F761800673AC4 /* HealthDashboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HealthDashboard-Bridging-Header.h"; sourceTree = "<group>"; };
+		BB01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BB13 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BB14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BB15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BB16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB20 /* HealthDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAD11DEECB6E2507C84B0E70 /* HealthDashboard/Controllers/HDExerciseTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthDashboard/Controllers/HDExerciseTypeViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CC01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA14 /* UIKit.framework in Frameworks */,
+				AA15 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04C90C922F6F752900673AC4 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				FAD11DEECB6E2507C84B0E70 /* HealthDashboard/Controllers/HDExerciseTypeViewController.m */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		CC10 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0437DACC2F7026420052AB86 /* HDTabBarController.swift */,
+				0437DAC42F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift */,
+				0437DAC52F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift */,
+				0437DAC62F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift */,
+				0437DAC72F6FFC1A0052AB86 /* HDExerciseTypeViewController.swift */,
+				0437DAC22F6FF5160052AB86 /* HDDashboardViewController.swift */,
+				0437DAC02F6FEC030052AB86 /* HDQuickAddViewController.swift */,
+				04C90C932F6F757600673AC4 /* HDProfileViewController.swift */,
+				04C90C952F6F761800673AC4 /* HealthDashboard-Bridging-Header.h */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CC11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0437DADC2F702A080052AB86 /* HDHealthDataModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CC12 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0437DAD02F70267C0052AB86 /* HDDashboardCardView.swift */,
+				0437DAD12F70267C0052AB86 /* HDExerciseTypeView.swift */,
+				0437DAD22F70267C0052AB86 /* HDMoodTrendView.swift */,
+				0437DAD32F70267C0052AB86 /* HDRingProgressView.swift */,
+				0437DAD42F70267C0052AB86 /* HDSleepBarView.swift */,
+				0437DAD52F70267C0052AB86 /* HDWaterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CC13 /* HealthDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				0437DACE2F7026520052AB86 /* AppDelegate.swift */,
+				CC10 /* Controllers */,
+				CC11 /* Models */,
+				CC12 /* Views */,
+				BB01 /* main.m */,
+				BB13 /* LaunchScreen.storyboard */,
+				BB16 /* Info.plist */,
+			);
+			path = HealthDashboard;
+			sourceTree = "<group>";
+		};
+		CC14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB20 /* HealthDashboard.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC15 /* HealthDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				CC13 /* HealthDashboard */,
+				BB14 /* UIKit.framework */,
+				BB15 /* Foundation.framework */,
+				CC14 /* Products */,
+				04C90C922F6F752900673AC4 /* Recovered References */,
+			);
+			name = HealthDashboard;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CC20 /* HealthDashboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC30 /* Build configuration list for PBXNativeTarget "HealthDashboard" */;
+			buildPhases = (
+				CC02 /* Sources */,
+				CC01 /* Frameworks */,
+				CC03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HealthDashboard;
+			productName = HealthDashboard;
+			productReference = BB20 /* HealthDashboard.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CC21 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					CC20 = {
+						CreatedOnToolsVersion = 16.0;
+						LastSwiftMigration = 2630;
+					};
+				};
+			};
+			buildConfigurationList = CC31 /* Build configuration list for PBXProject "HealthDashboard" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = zh_CN;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				zh_CN,
+				Base,
+			);
+			mainGroup = CC15 /* HealthDashboard */;
+			productRefGroup = CC14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CC20 /* HealthDashboard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CC03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA13 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CC02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA01 /* main.m in Sources */,
+				AA02 /* (null) in Sources */,
+				0437DACF2F7026520052AB86 /* AppDelegate.swift in Sources */,
+				0437DAC12F6FEC030052AB86 /* HDQuickAddViewController.swift in Sources */,
+				AA03 /* (null) in Sources */,
+				AA04 /* (null) in Sources */,
+				0437DACD2F7026420052AB86 /* HDTabBarController.swift in Sources */,
+				0437DADD2F702A080052AB86 /* HDHealthDataModel.swift in Sources */,
+				0437DAD62F70267C0052AB86 /* HDExerciseTypeView.swift in Sources */,
+				0437DAD72F70267C0052AB86 /* HDWaterView.swift in Sources */,
+				0437DAD82F70267C0052AB86 /* HDMoodTrendView.swift in Sources */,
+				0437DAD92F70267C0052AB86 /* HDDashboardCardView.swift in Sources */,
+				0437DADA2F70267C0052AB86 /* HDRingProgressView.swift in Sources */,
+				0437DADB2F70267C0052AB86 /* HDSleepBarView.swift in Sources */,
+				04C90C942F6F757600673AC4 /* HDProfileViewController.swift in Sources */,
+				0437DAC82F6FFC1A0052AB86 /* HDExerciseTypeViewController.swift in Sources */,
+				0437DAC92F6FFC1A0052AB86 /* HDExerciseSettingViewController.swift in Sources */,
+				0437DACA2F6FFC1A0052AB86 /* HDExerciseSummaryViewController.swift in Sources */,
+				0437DACB2F6FFC1A0052AB86 /* HDExerciseTimerViewController.swift in Sources */,
+				0437DAC32F6FF5160052AB86 /* HDDashboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CC40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/HealthDashboard",
+					"$(SRCROOT)/HealthDashboard/Models",
+					"$(SRCROOT)/HealthDashboard/Views",
+					"$(SRCROOT)/HealthDashboard/Controllers",
+				);
+				INFOPLIST_FILE = HealthDashboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangh.healthdashboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "HealthDashboard/Controllers/HealthDashboard-Bridging-Header.h";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CC41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/HealthDashboard",
+					"$(SRCROOT)/HealthDashboard/Models",
+					"$(SRCROOT)/HealthDashboard/Views",
+					"$(SRCROOT)/HealthDashboard/Controllers",
+				);
+				INFOPLIST_FILE = HealthDashboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangh.healthdashboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "HealthDashboard/Controllers/HealthDashboard-Bridging-Header.h";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CC42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CC43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CC30 /* Build configuration list for PBXNativeTarget "HealthDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC40 /* Debug */,
+				CC41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC31 /* Build configuration list for PBXProject "HealthDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC42 /* Debug */,
+				CC43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CC21 /* Project object */;
+}
