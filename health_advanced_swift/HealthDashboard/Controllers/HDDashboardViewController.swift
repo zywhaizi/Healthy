@@ -2,7 +2,7 @@
 //  HDDashboardViewController.swift
 //  HealthDashboard - 首页仪表盘
 //
-//  Created by AI Assistant on 2026/3/22.
+//  Created by zhang, haizi on 2026/3/22.
 //
 
 import UIKit

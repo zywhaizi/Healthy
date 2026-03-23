@@ -2,7 +2,7 @@
 //  HDExerciseSettingViewController.swift
 //  HealthDashboard - 目标跑设置
 //
-//  Created by AI Assistant on 2026/3/22.
+//  Created by zhang, haizi on 2026/3/22.
 //
 
 import UIKit

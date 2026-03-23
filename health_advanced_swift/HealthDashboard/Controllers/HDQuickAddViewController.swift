@@ -2,7 +2,7 @@
 //  HDQuickAddViewController.swift
 //  HealthDashboard - 快速录入底部弹窗
 //
-//  Created by AI Assistant on 2026/3/22.
+//  Created by zhang, haizi on 2026/3/22.
 //
 
 import UIKit

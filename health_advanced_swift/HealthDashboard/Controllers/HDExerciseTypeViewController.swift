@@ -2,7 +2,7 @@
 //  HDExerciseTypeViewController.swift
 //  HealthDashboard - 运动类型选择
 //
-//  Created by AI Assistant on 2026/3/22.
+//  Created by zhang, haizi on 2026/3/22.
 //
 
 import UIKit
