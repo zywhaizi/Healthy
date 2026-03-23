@@ -8,11 +8,10 @@
 ## 项目概览
 
 - **项目名**: HealthDashboard
-- **技术栈**: iOS · Objective-C + Swift · UIKit · MVC/MVVM
+- **技术栈**: iOS · Swift · UIKit · MVVM · Combine
 - **核心功能**: 健康数据仪表盘（步数、喝水、睡眠、心情）
 - **作者**: zhang, haizi
 - **创建时间**: 2026/3/19
-- **迁移计划**: 渐进式从 OC + MVC 迁移到 Swift + MVVM
 
 ---
 
@@ -25,18 +24,13 @@
 ├── .cursor/rules/mvvm-architecture.mdc
 ├── .cursor/rules/combine-binding.mdc
 ├── .agents/skills/health-data-model/SKILL.md
-├── .agents/skills/ios-objc-patterns/SKILL.md
 ├── .agents/skills/swift-language/SKILL.md
 ├── .agents/skills/mvvm-pattern/SKILL.md
 ├── .agents/skills/combine-binding/SKILL.md
 └── .agents/skills/design-system/SKILL.md
 
-迁移链路（触发迁移任务时）
-├── .cursor/rules/swift-migration-gate.mdc        ← 门禁规则
-├── .agents/skills/swift-migration-agent/SKILL.md ← 主执行流程
-├── .agents/skills/swift-migration-agent/CHECKLIST.md ← 验收清单（含页面专项）
-├── .agents/skills/swift-oc-migration-agent/SKILL.md  ← 已合并，重定向至主文档
-└── .agents/skills/swift-oc-reference-migration/SKILL.md ← 已合并，重定向至主文档
+质量门禁（修改 Swift 文件时触发）
+└── .cursor/rules/swift-migration-gate.mdc
 
 页面层（按文件/目录自动合并）
 ├── .cursor/rules/page-{dashboard|profile|quickadd|tabbar|exercise}.mdc
@@ -47,31 +41,39 @@
 ├── AGENTS.md (全局入口)
 ├── HealthDashboard/AGENTS.md (模块入口)
 └── HealthDashboard/Controllers/AGENTS.md (控制器入口)
+
+专职执行层（手动触发）
+├── .cursor/agents/debugger.md        ← @debugger
+├── .cursor/agents/refactor-advisor.md ← @refactor-advisor
+└── .cursor/agents/verifier.md        ← @verifier
+
+安全护栏层（自动触发）
+├── .cursor/hooks/guard.sh
+├── .cursor/hooks/block-sensitive.sh
+└── .cursor/hooks/quality-gate.sh
+
+长期记忆层
+├── .cursor/memory/sop.md
+├── .cursor/memory/project-decisions.md
+├── .cursor/memory/known-issues.md
+├── .cursor/memory/team-conventions.md
+├── .cursor/memory/execution-environment.md
+└── .cursor/memory/feedback.md
 ```
 
 ---
 
 ## 完整能力清单（统一管理视图）
 
-### 🚧 迁移优先链路（Compile-First）
-
-当任务涉及 OC → Swift 迁移时，必须优先执行以下链路：
-
-1. 先应用规则：`.cursor/rules/swift-migration-gate.mdc`
-2. 再按 Skill 执行：`.agents/skills/swift-migration-agent/SKILL.md`
-3. 全程使用检查单：`.agents/skills/swift-migration-agent/CHECKLIST.md`
-
-> 迁移任务默认目标：**0 编译错误 + 功能可用 + 主题与回调链路正常**。
-
 ### 🔒 行为约束层 · Rules
 
 | 文件 | 职责 |
 |---|---|
-| `swift-migration-gate.mdc` | OC→Swift 迁移阻断门禁（先编译、再替换、后验收） |
-| `global-always.mdc` | ObjC 规范、HD 前缀、禁止事项、Quality Gate |
-| `swift-always.mdc` | Swift 规范、HD 前缀、禁止事项、Quality Gate |
+| `global-always.mdc` | HD 前缀、禁止事项、Guardrails、Quality Gate |
+| `swift-always.mdc` | Swift 规范、MVVM 约束、Quality Gate |
 | `mvvm-architecture.mdc` | MVVM 架构规范、各层职责 |
 | `combine-binding.mdc` | Combine 数据绑定规范 |
+| `swift-migration-gate.mdc` | Swift 编译质量门禁（六项验收） |
 | `page-dashboard.mdc` | 仪表盘页面约束 |
 | `page-profile.mdc` | 个人中心页面约束 |
 | `page-quickadd.mdc` | 快速录入页面约束 |
@@ -90,9 +92,7 @@
 
 | Skill | 职责 |
 |---|---|
-| `swift-migration-agent/SKILL.md` | OC→Swift 迁移统一执行版（8 步流程） |
 | `health-data-model/SKILL.md` | HDHealthDataModel 接口、数据关系图 |
-| `ios-objc-patterns/SKILL.md` | Singleton/Delegate/Theme/Notification 模式 |
 | `swift-language/SKILL.md` | Swift 语言特性和最佳实践 |
 | `mvvm-pattern/SKILL.md` | MVVM 设计模式的完整实现 |
 | `combine-binding/SKILL.md` | Combine 框架的数据绑定 |
@@ -109,15 +109,56 @@
 | 运动模块 | `page-exercise/SKILL.md` | 页面职责、Delegate、计时器、卡路里 |
 | 自定义 View | `views-components/SKILL.md` | 5个组件接口说明 |
 
+### 🤖 专职执行层 · Agents
+
+| Agent | 触发方式 | 职责 |
+|---|---|---|
+| `@verifier` | 说「帮我验收」/「检查完成度」 | 只读验收，输出结构化报告 |
+| `@refactor-advisor` | 说「重构」/「架构优化」 | 提案优先，HITL 确认后执行 |
+| `@debugger` | 说「报错」/「crash」/「不工作」 | 系统性排障，最小化修复 |
+
+### 🛡 安全护栏层 · Hooks
+
+| 脚本 | 触发时机 | 职责 |
+|---|---|---|
+| `guard.sh` | Shell 命令执行前 | 拦截危险命令（rm -rf 等） |
+| `block-sensitive.sh` | 文件读取前 | 屏蔽 .env / 证书文件 |
+| `quality-gate.sh` | Agent 完成时 / pre-commit | 质量检查 |
+
+### 🗃 长期记忆层 · Memory
+
+| 文件 | 类型 | 职责 |
+|---|---|---|
+| `sop.md` | 长期 | 标准操作流程（修改页面、添加功能、修复 Bug 等） |
+| `project-decisions.md` | 长期 | 关键架构决策与理由 |
+| `known-issues.md` | 临时 | 已知 Bug、根因、修复状态 |
+| `team-conventions.md` | 长期 | Code Review 标准、提交信息格式、分支管理 |
+| `execution-environment.md` | 长期 | 执行环境约束、工具调用规范 |
+| `feedback.md` | 临时 | Agent 错误记录、改进建议、学习日志 |
+
 ---
 
 ## 核心约定（Agent 必读）
 
 1. **前缀**: 所有类名使用 `HD` 前缀
-2. **数据单例**: 全局数据通过 `[HDHealthDataModel shared]` 读写
-3. **主题**: UI 主题切换通过 `applyTheme` 方法
-4. **Delegate**: 跨 VC 通信使用 Delegate 模式
+2. **数据单例**: 全局数据通过 `HDHealthDataModel.shared` 读写
+3. **主题**: UI 主题切换通过 `applyTheme` 方法，订阅 `$isDarkMode`
+4. **Delegate**: 跨 VC 通信使用 Delegate 模式（`weak` 声明）
 5. **禁止事项**: 不得引入第三方库、不得修改 `Info.plist` 关键字段
+
+---
+
+## 快速触发指南
+
+```
+场景                          触发方式
+─────────────────────────────────────────────
+改某个 VC         →  打开那个文件，Rules 自动生效
+需要验收          →  @verifier 或说「帮我验收」
+需要重构建议      →  @refactor-advisor
+遇到 Bug          →  @debugger 或说「这里报错了」
+查项目全貌        →  @AGENTS.md
+```
 
 ---
 
@@ -126,6 +167,6 @@
 ```
 1. 新建 .cursor/rules/page-{name}.mdc
 2. 新建 HealthDashboard/.agents/skills/page-{name}/SKILL.md
-3. 在 HDTabBarController 注册新 Tab
+3. 在 HDTabBarController 注册新 Tab（需人工确认）
 4. 在本文件能力清单中补充对应行
 ```

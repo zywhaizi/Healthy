@@ -12,16 +12,14 @@ View 层 (UIViewController)
   ↓ (持有 ViewModel，手动订阅 @Published 属性)
 ViewModel 层 (@Published 属性)
   ↓ (调用方法)
-Model 层 (HDHealthDataModel.shared()   ← OC 单例，非 Swift 类)
+Model 层 (HDHealthDataModel.shared())
   ↓ (读写数据)
 本地存储
 ```
 
 ## 关键约定
 
-- `HDHealthDataModel` 是 **OC 单例**，Swift 通过 Bridging Header 访问
-- Swift 侧调用：`HDHealthDataModel.shared()`（注意带括号，OC 方法）
-- Model **没有** `@Published` 属性，ViewModel 需用 KVO 或手动刷新观察数据变化
+- Model **没有** `@Published` 属性，ViewModel 通过 `refreshData()` 手动读取数据并更新 `@Published` 属性
 - 写入数据只能用 `addWater` / `addSteps` / `addMood`，不得直接修改属性
 
 ## 标准 ViewModel 写法
@@ -38,7 +36,7 @@ class HDDashboardViewModel: ObservableObject {
         refreshData()
     }
 
-    /// 从 OC Model 读取数据，更新 @Published 属性
+    /// 从 Model 读取数据，更新 @Published 属性
     func refreshData() {
         stepsText = "\(model.todaySteps)"
         progressValue = model.stepsProgress

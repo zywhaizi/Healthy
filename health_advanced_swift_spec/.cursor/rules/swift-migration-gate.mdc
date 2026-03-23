@@ -1,58 +1,49 @@
 ---
-description: OC→Swift 迁移编译门禁。聚焦零报错、可编译、功能可用。
+description: Swift 代码质量门禁。聚焦编译零报错、架构合规、功能可用。
 globs:
   - "HealthDashboard/**/*.swift"
-  - "HealthDashboard/**/*.m"
-  - "HealthDashboard/**/*.h"
 alwaysApply: false
 ---
 
-# Swift Migration Gate（编译优先）
+# Swift 代码质量门禁
 
-> 目标：迁移后 **不报错、可编译、功能正常**。
-> 执行流程见：`.agents/skills/swift-migration-agent/SKILL.md`
-> 验收清单见：`.agents/skills/swift-migration-agent/CHECKLIST.md`
+> 目标：代码 **0 编译错误、架构合规、功能正常**。
 
 ## 适用范围
 
 以下任一操作必须启用本门禁：
-- 将 Objective-C 页面迁移为 Swift
-- 修改迁移页面的入口引用（Tab、路由、工厂创建）
-- 删除或替换已有 OC ViewController 文件
+- 新增或修改 Swift ViewController / ViewModel / View
+- 修改数据写入逻辑
+- 修改主题切换逻辑
+- 修改 Delegate 回调链路
 
 ---
 
 ## 硬约束（必须）
 
 ### 编译约束
-- 不允许带着编译错误进入下一步
-- Bridging Header 路径：`HealthDashboard/Controllers/HealthDashboard-Bridging-Header.h`
-- Swift 类找不到时优先检查：模块名 `HealthDashboard`、类名、target membership
+- 不允许带着编译错误提交或报告完成
+- 修改后必须确认 0 error、0 关键 warning
 
 ### 架构约束
 - 数据写入必须通过 `HDHealthDataModel` 方法：`addWater` / `addSteps` / `addMood`
-- 不得在 View 中直接访问 Model
-- 所有迁移后的 ViewController 必须实现 `applyTheme`
+- 禁止在 View 中直接访问 `HDHealthDataModel.shared()`
+- 禁止在 ViewController 中写业务计算逻辑（放 ViewModel）
+- 所有 ViewController 必须实现 `applyTheme`
 - 不得删除已有 `applyTheme` 实现
 
 ### 安全约束
 - 禁止修改 `project.pbxproj`
-- 禁止删除 `.storyboard/.plist` 文件
 - 禁止引入第三方依赖
-- OC `.h/.m` 文件：六项验收全部通过后**直接删除**，无需等待用户确认
-
-### 工程注册约束（必须提醒用户）
-- Agent **无法自动修改** `project.pbxproj`，Swift 文件创建后必须提醒用户：
-  > ⚠️ 请在 Xcode 中手动将新建的 `.swift` 文件加入工程 Target：
-  > 选中文件 → File Inspector（右侧面板）→ Target Membership → 勾选 `HealthDashboard`
-- 未加入 Target 会导致 `NSClassFromString` 返回 nil
+- 禁止硬编码颜色值（使用系统语义色）
+- 禁止硬编码字符串（使用常量）
 
 ---
 
 ## 六项验收（全部通过才可报告完成）
 
 - [ ] A. 编译通过：0 error
-- [ ] B. 页面可实例化：`NSClassFromString` 创建对象非 nil
+- [ ] B. 页面可实例化：ViewController 可正常创建
 - [ ] C. 生命周期正常：`viewDidLoad`、`viewWillAppear` 可执行
 - [ ] D. 主题正常：`applyTheme` 生效，深浅色切换正常
 - [ ] E. 数据链路正常：读写符合 `HDHealthDataModel` 约束
@@ -60,22 +51,12 @@ alwaysApply: false
 
 ---
 
-## 输出模板（每次迁移必须输出）
+## 输出模板（每次功能修改必须自查并输出）
 
-```md
-[迁移对象]
+````md
+[修改对象]
 - 页面：HDxxxViewController
-- 入口引用文件：HDTabBarController.m
-
-[执行结果]
-- Step1 读取引用：✅/❌
-- Step2 Swift骨架：✅/❌
-- Step3 target检查：✅/❌
-- Step4 首次编译：✅/❌
-- Step5 入口替换：✅/❌
-- Step6 二次编译：✅/❌
-- Step7 功能冒烟：✅/❌
-- Step8 OC清理：✅/❌（如未执行说明原因）
+- 改动范围：UI / 数据 / 主题 / 回调
 
 [六项验收]
 - A 编译：✅/❌
@@ -87,4 +68,4 @@ alwaysApply: false
 
 [遗留风险]
 - 无 / 列出风险项
-```
+````

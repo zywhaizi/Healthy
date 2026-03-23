@@ -1,157 +1,84 @@
 ---
 name: page-exercise
-description: 运动模块（HDExerciseTypeViewController、HDExerciseTimerViewController、HDExerciseSummaryViewController、HDExerciseSettingViewController）的业务逻辑、Delegate 通信、计时器实现规范。
+description: 运动模块（HDExerciseTypeViewController、HDExerciseSettingViewController、HDExerciseTimerViewController、HDExerciseSummaryViewController）的业务逻辑与实现规范。
 ---
 
 # page-exercise · 运动模块知识库
 
-## 页面职责
+> 当前实现：`Controllers/HDExercise*.swift`（Swift + UIKit + Combine）
 
-运动模块：运动类型选择 → 实时计时 → 统计展示 → 目标设置
+## 页面职责
 
 | 页面 | 职责 |
 |---|---|
-| HDExerciseTypeViewController | 展示6种运动类型供用户选择 |
-| HDExerciseTimerViewController | 实时计时、暂停/继续、完成运动 |
-| HDExerciseSummaryViewController | 展示本次运动的统计数据（时长、卡路里等） |
-| HDExerciseSettingViewController | 设置每日运动目标 |
+| `HDExerciseTypeViewController` | 运动入口选择（目标跑 / 自由跑） |
+| `HDExerciseSettingViewController` | 目标跑参数设置（距离/时间） |
+| `HDExerciseTimerViewController` | 实时计时、配速、卡路里计算 |
+| `HDExerciseSummaryViewController` | 展示本次运动结果并返回根页面 |
 
-## 必做清单
+## 当前数据链路
 
-```
-每个 ViewController:
-  ☐ viewWillAppear 中调用 refreshData() 和 applyTheme()
-  ☐ 实现 applyTheme 方法
-  ☐ NS_ASSUME_NONNULL_BEGIN/END 包裹
-  ☐ HD 前缀命名
+```swift
+// 计时结束后保存记录
+let record = HDExerciseRecord()
+record.type = exerciseType
+record.durationSeconds = elapsedSeconds
+record.distanceKM = currentDistance
+record.caloriesBurned = Int(Double(elapsedSeconds) * 0.1)
+record.timestamp = Date()
 
-数据操作:
-  ☐ 写入: [[HDHealthDataModel shared] addExercise:record]
-  ☐ 读取: Model 的 readonly 属性
-  ☐ 禁止直接修改 Model 属性
-  ☐ 禁止在 View 中访问 Model
-
-计时器:
-  ☐ 使用 dispatch_source_create（不用 NSTimer）
-  ☐ dealloc 中调用 dispatch_source_cancel
-  ☐ 不阻塞主线程
-
-Delegate:
-  ☐ delegate 属性声明为 weak
-  ☐ 运动完成后调用 exerciseDidComplete:
-  ☐ 在 TabBarController 中设置 delegate
+HDHealthDataModel.shared.saveExerciseRecord(record)
 ```
 
-## Delegate 通信
+## 设置页规则
 
-```objc
-@protocol HDExerciseDelegate <NSObject>
-- (void)exerciseDidComplete:(HDExerciseRecord *)record;
-- (void)exerciseDidCancel;
-@end
-
-// 在 HDExerciseTimerViewController 中
-- (void)finishExercise {
-    HDExerciseRecord *record = [HDExerciseRecord new];
-    record.exerciseType = self.selectedType;
-    record.durationMinutes = self.elapsedSeconds / 60;
-    record.caloriesBurned = [self calculateCalories];
-    
-    [[HDHealthDataModel shared] addExercise:record];
-    
-    if ([self.delegate respondsToSelector:@selector(exerciseDidComplete:)]) {
-        [self.delegate exerciseDidComplete:record];
-    }
-}
+```swift
+// 目标设置写入模型配置
+let model = HDHealthDataModel.shared
+model.targetRunDistanceKM = distance   // 1~50
+model.targetRunMinutes = time          // 1~180
 ```
 
-## 计时器实现（dispatch_source）
+## 计时器规则（当前实现）
 
-```objc
-@property dispatch_source_t timerSource;
+```swift
+timer = Timer.scheduledTimer(
+    timeInterval: 1.0,
+    target: self,
+    selector: #selector(updateTimer),
+    userInfo: nil,
+    repeats: true
+)
 
-- (void)startTimer {
-    self.timerSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-    dispatch_source_set_timer(self.timerSource, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(self.timerSource, ^{
-        self.elapsedSeconds++;
-        [self updateTimerDisplay];
-    });
-    dispatch_resume(self.timerSource);
-}
-
-- (void)stopTimer {
-    if (self.timerSource) {
-        dispatch_source_cancel(self.timerSource);
-        self.timerSource = nil;
-    }
-}
-
-- (void)dealloc {
-    [self stopTimer];
-}
+// 结束或暂停时必须释放
+timer?.invalidate()
+timer = nil
 ```
 
-## 卡路里计算
+> 说明：当前实现使用 `Timer`，符合页面需求。重点是保证生命周期正确，避免泄漏。
 
-```objc
-- (CGFloat)calculateCaloriesForType:(HDExerciseType)type duration:(NSInteger)minutes {
-    CGFloat caloriesPerMinute = 0;
-    switch (type) {
-        case HDExerciseTypeRunning:     caloriesPerMinute = 10.0;  break;
-        case HDExerciseTypeCycling:     caloriesPerMinute = 8.0;   break;
-        case HDExerciseTypeSwimming:    caloriesPerMinute = 11.0;  break;
-        case HDExerciseTypeWalking:     caloriesPerMinute = 4.0;   break;
-        case HDExerciseTypeYoga:        caloriesPerMinute = 3.5;   break;
-        case HDExerciseTypeStrength:    caloriesPerMinute = 6.0;   break;
-    }
-    return caloriesPerMinute * minutes;
-}
-```
+## 主题切换规范
 
-## 主题适配
+四个页面都需订阅：
 
-```objc
-- (void)applyTheme {
-    // 必须使用语义色，禁止硬编码 RGB 值
-    self.view.backgroundColor = UIColor.systemGroupedBackgroundColor;
-    self.titleLabel.textColor = UIColor.labelColor;
-    self.subtitleLabel.textColor = UIColor.secondaryLabelColor;
-    // 其他 UI 元素同样使用语义色
-}
+```swift
+HDHealthDataModel.shared.$isDarkMode
+    .receive(on: DispatchQueue.main)
+    .sink { [weak self] _ in self?.applyTheme() }
+    .store(in: &cancellables)
 ```
 
 ## 禁止事项
 
-- 禁止直接修改 Model 数据（如 `model.todayExerciseMinutes = 60`）
-- 禁止在 View 中访问 `[HDHealthDataModel shared]`
-- 禁止硬编码颜色值（使用语义色）
-- 禁止使用 NSTimer（会阻塞主线程）
-- 禁止使用 performSelector
+- 禁止在 View 中直接读写 Model
+- 禁止硬编码颜色值
+- 禁止遗漏 `timer?.invalidate()`
+- 禁止在计时回调中做耗时操作
 
 ## 常见问题
 
-**Q: 如何在计时器中更新 UI？**
-A: 使用 `dispatch_source_create` 在主线程更新：
-```objc
-dispatch_source_set_event_handler(self.timerSource, ^{
-    self.elapsedSeconds++;
-    [self updateTimerDisplay];  // 主线程更新 UI
-});
-```
+**计时器重复触发**：确认恢复计时时没有重复创建多个 `Timer`。
 
-**Q: 如何避免循环引用？**
-A: Delegate 必须声明为 `weak`：
-```objc
-@property (nonatomic, weak) id<HDExerciseDelegate> delegate;
-```
+**目标跑进度不变化**：检查 `targetRunDistanceKM` 是否大于 0 且 `progressView.progress` 使用了 `currentDistance / targetDist`。
 
-**Q: 如何响应主题切换？**
-A: 在 `viewWillAppear:` 中调用 `applyTheme`
-
-## 详细参考
-
-- **UI 规格**: `references/ui-spec.md` - 4个页面的布局、颜色、字体、间距
-- **数据模型**: `references/data-model.md` - Model 接口、Record 结构、计算方法
-- **质量检查**: `scripts/validate.sh` - 6项自动检查
-- **行为约束**: `.cursor/rules/page-exercise.mdc` - 禁止事项、必须遵守
+**总结页数据为空**：确认进入总结页前赋值了 `vc.exerciseRecord = record`。

@@ -37,24 +37,23 @@ model.$todaySteps
     }
 ```
 
-## 协议与 Delegate（Swift VC 被 OC 调用时）
+## 协议与 Delegate
 
 ```swift
-// Swift VC 的 delegate 属性必须加 @objc 让 OC 侧可访问
-class HDQuickAddViewController: UIViewController {
-    @objc weak var delegate: HDQuickAddDelegate?
+// Protocol 需要继承 AnyObject 支持 weak 引用
+// 标注 @objc 以便跨模块使用
+@objc protocol HDQuickAddDelegate: AnyObject {
+    func quickAddDidUpdateData()
 }
 
-// Protocol 需要继承 AnyObject 支持 weak 引用
-protocol HDQuickAddDelegate: AnyObject {
-    func quickAddDidUpdateData()
+class HDQuickAddViewController: UIViewController {
+    weak var delegate: HDQuickAddDelegate?
 }
 ```
 
-## 访问 OC Model（通过 Bridging Header）
+## 访问 Model
 
 ```swift
-// Swift 中调用 OC 单例
 let model = HDHealthDataModel.shared()
 
 // 写入数据只能用指定方法
@@ -71,7 +70,6 @@ let progress = model.stepsProgress  // CGFloat 0.0~1.0
 ```swift
 // 所有 VC 必须实现，使用系统语义色，禁止硬编码
 func applyTheme() {
-    let isDark = HDHealthDataModel.shared().isDarkMode
     view.backgroundColor = .systemBackground
     titleLabel.textColor = .label
     cardView.backgroundColor = .secondarySystemBackground

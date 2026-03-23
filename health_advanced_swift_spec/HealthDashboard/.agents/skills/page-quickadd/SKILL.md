@@ -1,48 +1,52 @@
 ---
 name: page-quickadd
-description: 快速录入页面（HDQuickAddViewController）业务逻辑、Delegate 回调、表单校验 SOP。
+description: 快速录入页面（HDQuickAddViewController）业务逻辑、Delegate 回调、底部弹窗实现规范。
 ---
 
 # page-quickadd · 快速录入知识库
 
-> ✅ 已迁移至 Swift + MVVM（2026/3/22）
-> 源文件：`Controllers/HDQuickAddViewController.swift`
+> 当前实现：`Controllers/HDQuickAddViewController.swift`（Swift + Combine + MVVM）
+
+## 定位
+
+QuickAdd 是 **FAB 底部弹窗**，不是独立 Tab。
+入口：`HDDashboardViewController` 右下角 FAB 按钮 → `present(HDQuickAddViewController)`
 
 ## 架构结构
 
 ```
-HDQuickAddViewController   ← UIViewController，底部弹窗样式
-  └── HDQuickAddViewModel  ← ObservableObject，步数显示文字
-        └── HDHealthDataModel.shared()  ← OC 单例，写入数据
+HDDashboardViewController（present 弹窗，conform HDQuickAddDelegate）
+  └── HDQuickAddViewController（底部弹窗，FAB 入口）
+        └── HDQuickAddViewModel（ObservableObject，步数显示文字）
+              └── HDHealthDataModel.shared（OC 单例，写入数据）
 ```
 
 ## Delegate 协议
 
 ```swift
-// 声明为 @objc protocol，让 OC 侧（Dashboard）可以 conform
+// 必须标注 @objc，让 OC 侧（如有）或 Swift 侧 Dashboard 可以 conform
 @objc protocol HDQuickAddDelegate: AnyObject {
     func quickAddDidUpdateData()
 }
 
-// delegate 属性必须 weak + @objc
-@objc weak var delegate: HDQuickAddDelegate?
+// ViewController 中 delegate 属性必须 weak
+weak var delegate: HDQuickAddDelegate?
 ```
 
-## 完整录入 SOP
+## 录入规格（当前实现）
 
-```
-1. 用户点击 FAB → Dashboard present QuickAdd
-2. 底部弹窗弹出动画（spring）
-3. 用户选择操作（喝水 / 步数滑块 / 心情 emoji）
-4. ViewModel 调用 Model 方法写入数据
-5. performDismiss() → 收起动画 → delegate 回调 → dismiss
-```
+| 类型 | 交互方式 | 写入值 |
+|---|---|---|
+| 喝水 | 按钮一键 | 固定 +200ml |
+| 步数 | 滑块 | 500～10000 步（用户拖动选择） |
+| 心情 | 5 个 emoji 按钮 | level 1～5（😞😕😐😊😄） |
 
 ## ViewModel 数据写入
 
 ```swift
 class HDQuickAddViewModel: ObservableObject {
-    private let model = HDHealthDataModel.shared()
+    @Published var stepsDisplayText: String = "2000步"
+    private let model = HDHealthDataModel.shared
 
     func addWater()          { model.addWater(200) }
     func addSteps()          { model.addSteps(stepsValue) }
@@ -59,53 +63,60 @@ class HDQuickAddViewModel: ObservableObject {
 ## dismiss 时序（必须遵守）
 
 ```swift
-/// 收起动画 → 调用 delegate → dismiss
+/// ✅ 正确：先回调 delegate，再 dismiss
 private func performDismiss() {
     UIView.animate(withDuration: 0.25, animations: {
         self.sheetView.transform = CGAffineTransform(translationX: 0, y: 400)
         self.view.backgroundColor = .clear
     }, completion: { _ in
-        self.delegate?.quickAddDidUpdateData()  // ① 先回调
-        self.dismiss(animated: false, completion: nil)  // ② 再 dismiss
+        self.delegate?.quickAddDidUpdateData()   // ① 先回调
+        self.dismiss(animated: false)            // ② 再 dismiss
     })
 }
 ```
 
-## TabBar 入口（HDTabBarController.m 中 不适用）
-
-QuickAdd **不是独立 Tab**，而是 Dashboard 的 FAB 浮层弹窗。
-入口在 `HDDashboardViewController.swift` 的 `fabTapped()`：
+## Dashboard 侧 FAB 入口
 
 ```swift
+// HDDashboardViewController
 @objc private func fabTapped() {
-    let vc = HDQuickAddViewController()  // 直接实例化 Swift 类
-    vc.delegate = self                   // self 为 Dashboard，conform HDQuickAddDelegate
+    let vc = HDQuickAddViewController()
+    vc.delegate = self                        // 必须设置 delegate
     vc.modalPresentationStyle = .overFullScreen
     vc.modalTransitionStyle   = .crossDissolve
     present(vc, animated: false)
 }
+
+extension HDDashboardViewController: HDQuickAddDelegate {
+    func quickAddDidUpdateData() {
+        viewModel.refreshData()               // 刷新 Dashboard 数据
+    }
+}
 ```
 
-## 校验规则
-
-| 类型 | 最小值 | 最大值 | 单位 |
-|---|---|---|---|
-| 喝水 | 固定 200 | 固定 200 | ml |
-| 步数 | 500（滑块） | 10000（滑块） | 步 |
-| 心情 | 1 | 5 | 级 |
-
-## 心情 emoji 与 level 对应
+## 弹窗动画规范
 
 ```swift
-let emojis = ["😞", "😕", "😐", "😊", "😄"]
-// btn.tag = 100 + i + 1 → level 1~5
-let level = sender.tag - 100
+// 弹出（viewDidAppear）
+UIView.animate(
+    withDuration: 0.35,
+    delay: 0,
+    usingSpringWithDamping: 0.85,
+    initialSpringVelocity: 0.5,
+    animations: { self.sheetView.transform = .identity }
+)
+
+// 收起（performDismiss）
+UIView.animate(withDuration: 0.25, animations: {
+    self.sheetView.transform = CGAffineTransform(translationX: 0, y: 400)
+    self.view.backgroundColor = .clear
+})
 ```
 
 ## 常见问题
 
-**Delegate 无效**：检查 `delegate` 是否声明为 `@objc weak`，Dashboard 是否在 `fabTapped` 中设置 `vc.delegate = self`
+**Delegate 无效**：确认 `fabTapped` 中设置了 `vc.delegate = self`，且 Dashboard conform 了 `HDQuickAddDelegate`
 
-**dismiss 过早**：确保 `delegate?.quickAddDidUpdateData()` 在 `dismiss` **之前**调用（在 completion 闭包中）
+**dismiss 后 Dashboard 数据不刷新**：确认 `delegate?.quickAddDidUpdateData()` 在 `completion` 闭包中 `dismiss` **之前**调用
 
-**OC 侧找不到 delegate 属性**：Swift VC 的 `delegate` 属性必须加 `@objc` 修饰
+**步数显示不更新**：确认 `stepsSlider` 的 `valueChanged` 调用了 `viewModel.updateStepsDisplay(Int(slider.value))`
