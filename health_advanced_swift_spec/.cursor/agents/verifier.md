@@ -17,14 +17,15 @@ model: cursor-fast
 - [ ] 常量使用 `kHD` 前缀
 
 ### 架构约束
-- [ ] 没有在 View 中直接调用 `[HDHealthDataModel shared]`
+- [ ] 没有在 View 中直接调用 `HDHealthDataModel.shared()`
 - [ ] 数据写入只通过 Model 提供的方法（addWater/addSteps/addMood）
 - [ ] VC 实现了 `applyTheme` 方法
-- [ ] 头文件包含 `NS_ASSUME_NONNULL_BEGIN/END`
+- [ ] Delegate 属性声明为 `weak`
 
 ### 代码质量
-- [ ] 没有硬编码颜色值（#RRGGBB 或 UIColor 直接值）
-- [ ] 没有使用 `performSelector`
+- [ ] 没有硬编码颜色值（使用系统语义色）
+- [ ] 没有硬编码字符串（使用常量）
+- [ ] Combine 订阅使用了 `[weak self]` 且存入 `cancellables`
 - [ ] 没有在主线程做耗时操作
 - [ ] 没有引入新的第三方库
 
@@ -40,7 +41,7 @@ model: cursor-fast
 
 **状态**: ✅ 通过 / ⚠️ 有警告 / ❌ 未通过
 
-**通过项** (N/14):
+**通过项** (N/13):
 - ✅ ...
 
 **问题项**:

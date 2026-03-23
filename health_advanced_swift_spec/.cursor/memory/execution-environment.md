@@ -59,18 +59,18 @@ publisher.sink { [self] value in self.update(value) }  // 错误
 
 ```swift
 // ✅ 写入只能用 Model 方法
-HDHealthDataModel.shared.addWater(200)
-HDHealthDataModel.shared.addSteps(1000)
-HDHealthDataModel.shared.addMood(4)
+HDHealthDataModel.shared().addWater(200)
+HDHealthDataModel.shared().addSteps(1000)
+HDHealthDataModel.shared().addMood(4)
 
 // ✅ 配置类属性可以直接修改
-HDHealthDataModel.shared.isDarkMode = true
-HDHealthDataModel.shared.stepsGoal = 8000
-HDHealthDataModel.shared.waterGoalML = 2500
+HDHealthDataModel.shared().isDarkMode = true
+HDHealthDataModel.shared().stepsGoal = 8000
+HDHealthDataModel.shared().waterGoalML = 2500
 
 // ❌ 禁止直接修改业务数据属性
-HDHealthDataModel.shared.todaySteps = 5000  // 错误
-HDHealthDataModel.shared.waterML = 1000     // 错误
+HDHealthDataModel.shared().todaySteps = 5000  // 错误
+HDHealthDataModel.shared().waterML = 1000     // 错误
 ```
 
 ### 禁止事项（硬限制）
@@ -90,7 +90,6 @@ HDHealthDataModel.shared.waterML = 1000     // 错误
 |---|---|---|
 | `guard.sh` | Shell 命令执行前 | 拦截 `rm -rf` 等危险命令 |
 | `block-sensitive.sh` | 文件读取前 | 屏蔽 `.env`、证书等敏感文件 |
-| `format.sh` | 代码编辑后 | 自动格式化 |
 | `quality-gate.sh` | 提交前 / Agent 完成时 | 质量检查 |
 
 ### Git Hook 配置

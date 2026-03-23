@@ -13,7 +13,8 @@ description: HealthDashboard 项目的团队约定和工作流程
 - [ ] **applyTheme**：所有 ViewController 是否实现了 `applyTheme` 方法
 - [ ] **数据写入**：数据修改是否通过 Model 方法（`addWater:`、`addSteps:`、`addMood:`）
 - [ ] **颜色值**：是否有硬编码颜色（RGB 值），应使用语义色
-**NS_ASSUME_NONNULL**：头文件是否包含 `NS_ASSUME_NONNULL_BEGIN/END`
+- [ ] **Delegate**：delegate 属性是否声明为 `weak`
+- [ ] **Combine**：订阅是否使用 `[weak self]` 且存入 `cancellables`
 
 ### 可选项
 

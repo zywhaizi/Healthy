@@ -15,7 +15,7 @@ last-updated: 2026/3/21
 
 1. **打开对应文件**
    ```
-   打开 HDDashboardViewController.m（或其他 VC 文件）
+   打开 HDDashboardViewController.swift（或其他 VC 文件）
    ```
 
 2. **自动加载规范**
@@ -44,7 +44,7 @@ last-updated: 2026/3/21
    - [ ] 没有硬编码颜色值
    - [ ] 数据通过 Model 方法写入
    - [ ] 实现了 applyTheme 方法
-   - [ ] 没有使用 performSelector
+   - [ ] Combine 订阅使用了 `[weak self]` 且存入 `cancellables`
    ```
 
 5. **提交 PR 和 Code Review**
@@ -64,9 +64,9 @@ last-updated: 2026/3/21
    - [ ] HD 前缀
    - [ ] applyTheme 实现
    - [ ] 数据写入方式
-   - [ ] 颜色值
-   - [ ] performSelector
-   - [ ] NS_ASSUME_NONNULL
+   - [ ] 颜色值（无硬编码）
+   - [ ] Combine 订阅使用 `[weak self]`
+   - [ ] Delegate 声明为 `weak`
    ```
 
 ---
@@ -126,11 +126,11 @@ last-updated: 2026/3/21
    
    检查：
    - HD 前缀
-   - NS_ASSUME_NONNULL
    - 硬编码颜色
-   - performSelector
    - 数据写入方式
    - applyTheme 实现
+   - Combine 订阅 `[weak self]`
+   - Delegate 声明为 `weak`
    ```
 
 7. **提交 PR**
@@ -218,19 +218,13 @@ last-updated: 2026/3/21
     ↓
 HDProfileViewController 修改 isDarkMode
     ↓
-[HDHealthDataModel shared].isDarkMode = !isDarkMode
+HDHealthDataModel.shared().isDarkMode = !isDarkMode
     ↓
-发送 NSNotification（HDThemeDidChange）
+$isDarkMode Combine 订阅触发
     ↓
-HDTabBarController 收到通知
-    ↓
-调用 applyTheme 方法
-    ↓
-遍历所有子 VC，调用它们的 applyTheme
+各 VC 自身订阅响应，调用 applyTheme()
     ↓
 每个 VC 的 applyTheme 更新所有 UI 颜色
-    ↓
-所有 View 的 applyTheme 更新自己的颜色
     ↓
 主题切换完成
 ```
@@ -238,12 +232,10 @@ HDTabBarController 收到通知
 **实现检查清单**：
 
 - [ ] HDProfileViewController 中有主题切换按钮
-- [ ] 点击时修改 `[HDHealthDataModel shared].isDarkMode`
-- [ ] 发送 NSNotification
-- [ ] HDTabBarController 监听通知
-- [ ] 所有 ViewController 实现了 applyTheme
-- [ ] 所有 View 实现了 applyTheme
-- [ ] applyTheme 中使用语义色，不硬编码颜色
+- [ ] 点击时修改 `HDHealthDataModel.shared().isDarkMode`
+- [ ] 各 VC 在 `viewDidLoad` 中订阅 `$isDarkMode`
+- [ ] 所有 ViewController 实现了 `applyTheme`
+- [ ] `applyTheme` 中使用语义色，不硬编码颜色
 
 ---
 
@@ -270,12 +262,12 @@ HDTabBarController 收到通知
 校验通过
     ↓
 调用 Model 方法写入
-  - [[HDHealthDataModel shared] addWater:ml]
-  - [[HDHealthDataModel shared] addSteps:steps]
-  - [[HDHealthDataModel shared] addMood:level]
+  - HDHealthDataModel.shared().addWater(ml)
+  - HDHealthDataModel.shared().addSteps(steps)
+  - HDHealthDataModel.shared().addMood(level)
     ↓
 调用 Delegate 回调
-  - [self.delegate quickAddDidUpdateData]
+  - delegate?.quickAddDidUpdateData()
     ↓
 Dashboard 收到回调
     ↓
@@ -350,10 +342,10 @@ dismiss QuickAdd 页面
    ```
    - [ ] HD 前缀
    - [ ] applyTheme 实现
-   - [ ] 数据写入方式
+   - [ ] 数据写入方式（通过 Model 方法）
    - [ ] 颜色值（无硬编码）
-   - [ ] performSelector（无使用）
-   - [ ] NS_ASSUME_NONNULL（有包含）
+   - [ ] Combine 订阅使用 `[weak self]`
+   - [ ] Delegate 声明为 `weak`
    ```
 
 2. **检查可选项**
@@ -486,77 +478,49 @@ dismiss QuickAdd 页面
 
 ## 9. 新文件添加到工程的 SOP
 
-**场景**：创建新的 .h/.m 文件后，需要添加到 Xcode 工程
+**场景**：创建新的 `.swift` 文件后，需要添加到 Xcode 工程
 
 **步骤**：
 
 1. **创建文件**
    ```
-   在对应目录创建 .h 和 .m 文件
-   ├─ Controllers/ 目录 → ViewController 文件
+   在对应目录创建 .swift 文件
+   ├─ Controllers/ 目录 → ViewController / ViewModel 文件
    ├─ Views/ 目录 → View 文件
    ├─ Models/ 目录 → Model 文件
    └─ 其他目录 → 其他文件
    ```
 
-2. **添加到工程**
+2. **添加到工程 Target**
    ```
-   方式 A：自动添加（推荐）
-   - Xcode 会自动检测新文件
-   - 在 Project Navigator 中右键 → Add Files to "HealthDashboard"
-   - 选择新创建的文件
-   - 确保 "Copy items if needed" 未勾选（文件已在正确位置）
-   - 确保 "Add to targets" 中勾选了 HealthDashboard
-   
-   方式 B：手动编辑 project.pbxproj
-   - 不推荐（容易出错）
-   - 只在自动添加失败时使用
+   选中新建的 .swift 文件
+   → File Inspector（右侧面板）
+   → Target Membership
+   → 勾选 HealthDashboard
    ```
 
 3. **验证添加成功**
    ```
    检查清单：
    - [ ] 文件在 Project Navigator 中可见
-   - [ ] 文件在 Build Phases → Compile Sources 中
-   - [ ] 文件在 Build Phases → Copy Bundle Resources 中（如需要）
+   - [ ] Target Membership 已勾选 HealthDashboard
    - [ ] 编译成功（⌘B）
    ```
 
 4. **提交 PR**
    ```
-   git add HealthDashboard/Controllers/HDExerciseViewController.*
-   git add HealthDashboard/Views/HDCalorieProgressView.*
-   git add HealthDashboard/Views/HDExerciseCardView.*
-   git add HealthDashboard.xcodeproj/project.pbxproj
+   git add HealthDashboard/Controllers/HDExerciseViewController.swift
+   git add HealthDashboard/Controllers/HDExerciseViewModel.swift
    git commit -m "feat: 添加运动页面文件到工程"
    ```
 
-**关键原则**：
-- 新文件必须添加到 Xcode 工程
-- 必须在 Compile Sources 中
-- 必须在正确的 Target 中
-- 提交时必须包含 project.pbxproj 的改动
-
 **常见问题**：
 
-Q: 文件创建了但编译失败怎么办？
-A:
-1. 检查文件是否在 Project Navigator 中
-2. 检查文件是否在 Build Phases → Compile Sources 中
-3. 如果不在，手动添加：Project → Build Phases → Compile Sources → + → 选择文件
-
-Q: 如何批量添加多个文件？
-A:
-1. 在 Finder 中选择多个文件
-2. 在 Xcode 中右键 → Add Files to "HealthDashboard"
-3. 选择所有文件
-4. 点击 Add
+Q: 文件创建了但编译报错 `Cannot find type in scope`？
+A: File Inspector → Target Membership → 确认勾选了 HealthDashboard，然后 `Cmd+Shift+K` 清理重编。
 
 Q: 删除文件后需要做什么？
-A:
-1. 在 Xcode 中选择文件
-2. 右键 → Delete → Remove Reference（保留文件）或 Delete（删除文件）
-3. 提交 project.pbxproj 的改动
+A: 在 Xcode 中选择文件 → Delete → Move to Trash（同时从工程移除）。
 
 ---
 
